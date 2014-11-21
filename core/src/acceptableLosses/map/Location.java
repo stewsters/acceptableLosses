@@ -1,4 +1,4 @@
-package acceptableLosses;
+package acceptableLosses.map;
 
 
 public class Location {

@@ -1,6 +1,6 @@
 package acceptableLosses.systems;
 
-import acceptableLosses.Location;
+import acceptableLosses.map.Location;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

@@ -1,7 +1,7 @@
 package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
-import acceptableLosses.Location;
+import acceptableLosses.map.Location;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.MapRenderSystem;
 import com.badlogic.gdx.Gdx;
