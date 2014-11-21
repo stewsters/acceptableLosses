@@ -18,6 +18,10 @@ public class SplashScreen implements Screen {
 
     public SplashScreen(AcceptableLossesGame g) {
         game = g;
+        spriteBatch = new SpriteBatch();
+
+        font = new BitmapFont();
+        font.setColor(0.5f, 0.4f, 0, 1);
     }
 
     @Override
@@ -37,11 +41,6 @@ public class SplashScreen implements Screen {
 
     @Override
     public void show() {
-        spriteBatch = new SpriteBatch();
-//        splsh = new Texture(Gdx.files.internal("data/libgdx.png"));
-
-        font = new BitmapFont();
-        font.setColor(0.5f, 0.4f, 0, 1);
     }
 
     @Override
