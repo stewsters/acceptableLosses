@@ -1,7 +1,7 @@
 package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
-import acceptableLosses.map.Location;
+import acceptableLosses.map.Region;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.MapRenderSystem;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class GameScreen implements Screen {
 
     private AcceptableLossesGame game;
-    private Location location;
+    private Region region;
 
     private OrthographicCamera camera;
     private OrthographicCamera hudCam;
@@ -45,10 +45,10 @@ public class GameScreen implements Screen {
 
         zLevel = 50;
 
-        location = new Location(500,500,500);
+        region = new Region(500,500,500);
 
         elevationSystem = new ElevationSystem(this);
-        mapRenderSystem = new MapRenderSystem(spriteBatch,location);
+        mapRenderSystem = new MapRenderSystem(spriteBatch, region);
 
 
 //        inputManager = new InputManager(camera);

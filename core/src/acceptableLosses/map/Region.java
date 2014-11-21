@@ -4,7 +4,7 @@ package acceptableLosses.map;
 import acceptableLosses.systems.AppearanceRenderSystem;
 import com.artemis.World;
 
-public class Location {
+public class Region {
 
     public final TileType[][][] tiles;
 
@@ -14,7 +14,7 @@ public class Location {
 
     public World world;
 
-    public Location(int xSize, int ySize, int zSize) {
+    public Region(int xSize, int ySize, int zSize) {
         this.xSize = xSize;
         this.ySize = ySize;
         this.zSize = zSize;

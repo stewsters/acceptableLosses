@@ -1,6 +1,6 @@
 package acceptableLosses.systems;
 
-import acceptableLosses.map.Location;
+import acceptableLosses.map.Region;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,12 +11,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class MapRenderSystem extends VoidEntitySystem {
 
     private SpriteBatch spriteBatch;
-    private Location location;
+    private Region region;
 
 
-    public MapRenderSystem(SpriteBatch spriteBatch, Location location) {
+    public MapRenderSystem(SpriteBatch spriteBatch, Region region) {
         this.spriteBatch = spriteBatch;
-        this.location = location;
+        this.region = region;
     }
 
     @Override
