@@ -8,7 +8,7 @@ public class AcceptableLossesGame extends Game {
     @Override
     public void create() {
 
-        // Load assets
+        // Load assets.  Tiles, configs, whatever
 
         // Open a splash screen
         this.setScreen(new SplashScreen(this));
