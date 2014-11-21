@@ -23,6 +23,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
@@ -66,6 +67,8 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile "net.onedaybeard.artemis:artemis-odb:0.8.1"
+        compile "com.stewsters.util:stewsters-util:0.9"
     }
 }
 
