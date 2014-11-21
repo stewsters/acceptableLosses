@@ -5,7 +5,7 @@ public enum TileType {
 
     VACUUM("Vacuum", false),
     SILICON_ORE("Silicon Ore", true),
-    CARBON_ORE("Silicon Ore", true);
+    CARBON_ORE("Carbon Ore", true);
 
     public final String name;
     public final boolean blocks;
