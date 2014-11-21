@@ -67,10 +67,13 @@ public class GameScreen implements Screen {
 
         // controls
 
+        elevationSystem.process();
 
         camera.update();
 
         spriteBatch.setProjectionMatrix(camera.combined);
+
+        //Draw
         spriteBatch.begin();
 
         mapRenderSystem.process();

@@ -1,6 +1,9 @@
 package acceptableLosses.map;
 
 
+import acceptableLosses.systems.AppearanceRenderSystem;
+import com.artemis.World;
+
 public class Location {
 
     public final TileType[][][] tiles;
@@ -8,6 +11,8 @@ public class Location {
     public final int xSize;
     public final int ySize;
     public final int zSize;
+
+    public World world;
 
     public Location(int xSize, int ySize, int zSize) {
         this.xSize = xSize;
@@ -24,6 +29,7 @@ public class Location {
             }
         }
 
-
+        world = new World();
+        world.setSystem(new AppearanceRenderSystem());
     }
 }
