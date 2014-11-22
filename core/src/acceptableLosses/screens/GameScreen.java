@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
         shapeRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
-        camera.position.set(0, 0, 0);
+        camera.position.set(250, 250, 250);
         camera.zoom = 0.5f;
 
         hudCam = new OrthographicCamera();
