@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
         shapeRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
-        camera.position.set(250, 250, 0);
+        camera.position.set(250 * 16, 250 * 16, 0);
         camera.zoom = 0.5f;
 
         hudCam = new OrthographicCamera();
@@ -53,9 +53,6 @@ public class GameScreen implements Screen {
 
 
         inputManager = new InputManager(camera);
-
-//        LocationBuilder builder = new LocationBuilder();
-//        location = builder.generateLocation(universe);
 
     }
 
