@@ -37,12 +37,12 @@ public class GameScreen implements Screen {
         shapeRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
-        camera.position.set(250, 250, 250);
+        camera.position.set(250, 250, 0);
         camera.zoom = 0.5f;
 
         hudCam = new OrthographicCamera();
 
-        zLevel = 50;
+        zLevel = 250;
 
         region = new Region(500, 500, 500);
         AsteroidGenerator.generateBasicAsteroid(region);
