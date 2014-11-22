@@ -1,6 +1,7 @@
 package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
+import acceptableLosses.controls.commands.InputManager;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
 import acceptableLosses.systems.ElevationSystem;
@@ -25,7 +26,7 @@ public class GameScreen implements Screen {
     private SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
 
-//    public InputManager inputManager;
+    public InputManager inputManager;
     private ElevationSystem elevationSystem;
     private MapRenderSystem mapRenderSystem;
 
@@ -51,7 +52,7 @@ public class GameScreen implements Screen {
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
 
 
-//        inputManager = new InputManager(camera);
+        inputManager = new InputManager(camera);
 
 //        LocationBuilder builder = new LocationBuilder();
 //        location = builder.generateLocation(universe);
