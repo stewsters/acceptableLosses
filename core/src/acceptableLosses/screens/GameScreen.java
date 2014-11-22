@@ -1,6 +1,7 @@
 package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
+import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.MapRenderSystem;
@@ -44,6 +45,7 @@ public class GameScreen implements Screen {
         zLevel = 50;
 
         region = new Region(500, 500, 500);
+        AsteroidGenerator.generateBasicAsteroid(region);
 
         elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
