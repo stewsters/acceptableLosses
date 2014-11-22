@@ -45,9 +45,9 @@ public class GameScreen implements Screen {
 
         zLevel = 50;
 
-        region = new Region(500,500,500);
+        region = new Region(500, 500, 500);
 
-        elevationSystem = new ElevationSystem(this);
+        elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
 
 

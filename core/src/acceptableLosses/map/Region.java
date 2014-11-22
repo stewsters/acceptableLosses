@@ -24,7 +24,9 @@ public class Region {
         for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
                 for (int z = 0; z < zSize; z++) {
-                    tiles[x][y][z] = TileType.VACUUM;
+//                    tiles[x][y][z] = TileType.VACUUM;
+                    tiles[x][y][z] = ((x + y + z) % 2 == 0) ? TileType.CARBON_ORE : TileType.SILICON_ORE;
+
                 }
             }
         }
