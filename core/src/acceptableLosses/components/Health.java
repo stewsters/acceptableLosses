@@ -3,7 +3,7 @@ package acceptableLosses.components;
 import com.artemis.PooledComponent;
 
 /**
- * Created by dac on 11/20/2014.
+ * Stores the Health of someone
  */
 public class Health extends PooledComponent{
     public int current = 1;

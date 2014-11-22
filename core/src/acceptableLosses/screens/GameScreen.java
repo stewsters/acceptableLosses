@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
         region = new Region(500,500,500);
 
         elevationSystem = new ElevationSystem(this);
-        mapRenderSystem = new MapRenderSystem(spriteBatch, region);
+        mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
 
 
 //        inputManager = new InputManager(camera);
