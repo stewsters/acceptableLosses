@@ -24,9 +24,7 @@ public class GameScreen implements Screen {
     private SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
 
-
 //    public InputManager inputManager;
-
     private ElevationSystem elevationSystem;
     private MapRenderSystem mapRenderSystem;
 
@@ -85,29 +83,6 @@ public class GameScreen implements Screen {
 
         spriteBatch.end();
     }
-
-    private float timeSinceMove = 0f;
-    private static final float moveTime = 0.1f;
-
-//    private void control(float deltaT) {
-//        if (timeSinceMove < moveTime) {
-//            timeSinceMove += deltaT;
-//            return;
-//        }
-//
-//        timeSinceMove = 0;
-//
-//        Vector3 cam = game.controller.getCameraMovement();
-//        focus.x += cam.x;
-//        focus.y += cam.y;
-//        camera.zoom += cam.z;
-//
-//        focus.z += game.controller.checkLevelChange();
-//
-//        game.controller.clear();
-//
-////        menu = menu.control(keysPressed);
-//    }
 
     @Override
     public void resize(int width, int height) {
