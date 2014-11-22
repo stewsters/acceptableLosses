@@ -5,7 +5,7 @@ import com.artemis.PooledComponent;
 /**
  * Stores the Health of someone
  */
-public class Health extends PooledComponent{
+public class Health extends PooledComponent {
     public int current = 1;
     public int max = 1;
 

@@ -1,8 +1,6 @@
 package acceptableLosses.map;
 
 
-import acceptableLosses.systems.AppearanceRenderSystem;
-import com.artemis.World;
 import com.badlogic.gdx.Gdx;
 import com.stewsters.util.noise.OpenSimplexNoise;
 
@@ -17,7 +15,7 @@ public class AsteroidGenerator {
             for (int y = 0; y < region.ySize; y++) {
                 for (int z = 0; z < region.zSize; z++) {
 
-                    double randomValue = openSimplexNoise.eval(x/10f,y/10f,z/10f);
+                    double randomValue = openSimplexNoise.eval(x / 10f, y / 10f, z / 10f);
 
                     //times 4
                     int radius = Math.max(region.xSize, Math.max(region.ySize, region.zSize));  //diameter is half the total space
@@ -28,7 +26,7 @@ public class AsteroidGenerator {
                     double randomRadius = radius + ((randomValue * radius) / 50);
 
                     if (randomRadius * randomRadius > distSquared) {
-                        region.tiles[x][y][z] = (alternateOpenSimplexNoise.eval(x/20f,y/20f,z/20f) >= 0) ? TileType.CARBON_ORE : TileType.SILICON_ORE;
+                        region.tiles[x][y][z] = (alternateOpenSimplexNoise.eval(x / 20f, y / 20f, z / 20f) >= 0) ? TileType.CARBON_ORE : TileType.SILICON_ORE;
                         asteroidCount++;
                     } else {
                         region.tiles[x][y][z] = TileType.VACUUM;    //default
@@ -37,7 +35,7 @@ public class AsteroidGenerator {
                 }
             }
         }
-        Gdx.app.log("AsteroidGenerator","Count of asteroid is " + asteroidCount);
+        Gdx.app.log("AsteroidGenerator", "Count of asteroid is " + asteroidCount);
 
 
         return region;

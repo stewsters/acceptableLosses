@@ -43,10 +43,10 @@ public class GameScreen implements Screen {
 
         hudCam = new OrthographicCamera();
 
-        zLevel = 250;
-
-        region = new Region(500, 500, 500);
+        region = new Region(100, 100, 100);
         AsteroidGenerator.generateBasicAsteroid(region);
+
+        zLevel = region.zSize / 2;
 
         elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
