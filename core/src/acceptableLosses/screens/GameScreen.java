@@ -1,7 +1,7 @@
 package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
-import acceptableLosses.controls.commands.InputManager;
+import acceptableLosses.controls.InputManager;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
 import acceptableLosses.systems.ElevationSystem;

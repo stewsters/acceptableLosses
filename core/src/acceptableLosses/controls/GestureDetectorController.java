@@ -1,4 +1,4 @@
-package acceptableLosses.controls.commands;
+package acceptableLosses.controls;
 
 import acceptableLosses.map.MapTools;
 import com.badlogic.gdx.Gdx;

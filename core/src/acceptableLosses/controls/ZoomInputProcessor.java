@@ -1,4 +1,4 @@
-package acceptableLosses.controls.commands;
+package acceptableLosses.controls;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;

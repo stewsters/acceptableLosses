@@ -1,5 +1,7 @@
-package acceptableLosses.controls.commands;
+package acceptableLosses.controls;
 
+import acceptableLosses.controls.commands.Command;
+import acceptableLosses.controls.commands.TapCommand;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
