@@ -4,6 +4,8 @@ import acceptableLosses.AcceptableLossesGame;
 import acceptableLosses.controls.InputManager;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
+import acceptableLosses.map.Spawner;
+import acceptableLosses.systems.AppearanceRenderSystem;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.MapRenderSystem;
 import com.badlogic.gdx.Gdx;
@@ -30,6 +32,8 @@ public class GameScreen implements Screen {
     private ElevationSystem elevationSystem;
     private MapRenderSystem mapRenderSystem;
 
+    private AppearanceRenderSystem appearanceRenderSystem;
+
     public GameScreen(AcceptableLossesGame game) {
 
         this.game = game;
@@ -50,7 +54,11 @@ public class GameScreen implements Screen {
 
         elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
+        appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
+        region.world.initialize();
 
+
+        Spawner.spawnMan(region.world, 5, 5, zLevel);
 
         inputManager = new InputManager(camera);
 
@@ -59,6 +67,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        region.world.setDelta(delta);
+        region.world.process();
 
         Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -75,8 +86,8 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
 
         mapRenderSystem.process();
+        appearanceRenderSystem.process();
 
-        // render characters
 
         // menu.render(spriteBatch);
 

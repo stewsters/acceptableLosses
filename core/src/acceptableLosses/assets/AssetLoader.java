@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class AssetLoader {
 
-    private static TextureAtlas atlas;
+    public static TextureAtlas atlas;
 
     public static void init() {
         atlas = new TextureAtlas(Gdx.files.internal("textures/tile.atlas"));

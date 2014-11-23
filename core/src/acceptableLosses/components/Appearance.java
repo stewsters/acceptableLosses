@@ -8,7 +8,7 @@ public class Appearance extends PooledComponent {
 
     //TODO: add some appearance stuff
 
-    TextureRegion textureRegion;
+    public TextureRegion textureRegion;
 
     @Override
     protected void reset() {

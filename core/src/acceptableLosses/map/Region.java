@@ -1,7 +1,6 @@
 package acceptableLosses.map;
 
 
-import acceptableLosses.systems.AppearanceRenderSystem;
 import com.artemis.World;
 
 public class Region {
@@ -29,7 +28,8 @@ public class Region {
             }
         }
 
+        // we will need to initialize this before we use it.
         world = new World();
-        world.setSystem(new AppearanceRenderSystem());
+
     }
 }
