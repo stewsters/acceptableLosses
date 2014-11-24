@@ -8,6 +8,7 @@ import acceptableLosses.map.Spawner;
 import acceptableLosses.systems.AppearanceRenderSystem;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.MapRenderSystem;
+import acceptableLosses.systems.PathFinderSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -33,6 +34,7 @@ public class GameScreen implements Screen {
     private MapRenderSystem mapRenderSystem;
 
     private AppearanceRenderSystem appearanceRenderSystem;
+    private PathFinderSystem pathFinderSystem;
 
     public GameScreen(AcceptableLossesGame game) {
 
@@ -55,6 +57,7 @@ public class GameScreen implements Screen {
         elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
+        pathFinderSystem = region.world.setSystem(new PathFinderSystem(region));
         region.world.initialize();
 
 

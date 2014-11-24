@@ -1,0 +1,18 @@
+package acceptableLosses.components;
+
+
+import com.artemis.PooledComponent;
+import com.stewsters.util.math.Point3i;
+
+public class Destination extends PooledComponent {
+
+    public Point3i dest = new Point3i(0, 0, 0);
+
+    @Override
+    protected void reset() {
+        dest.x = 0;
+        dest.y = 0;
+        dest.z = 0;
+    }
+
+}
