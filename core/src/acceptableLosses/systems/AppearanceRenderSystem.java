@@ -40,6 +40,7 @@ public class AppearanceRenderSystem extends EntityProcessingSystem {
         // check to see if we are on screen
 
         Appearance appearance = am.get(e);
+        spriteBatch.setColor(1, 1, 1, 1);
         spriteBatch.draw(appearance.textureRegion, 16 * position.x, 16 * position.y, 16, 16);
 
 
