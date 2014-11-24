@@ -15,4 +15,12 @@ public class Destination extends PooledComponent {
         dest.z = 0;
     }
 
+    public Destination set(int x, int y, int z) {
+        dest.x = x;
+        dest.y = y;
+        dest.z = z;
+
+        return this;
+    }
+
 }

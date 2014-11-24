@@ -8,16 +8,19 @@ import com.stewsters.util.pathing.threeDimention.shared.FullPath3d;
  */
 public class Path extends PooledComponent {
 
-    FullPath3d fullPath3d;
+    public FullPath3d fullPath3d;
+    public int step;
 
     @Override
     protected void reset() {
         fullPath3d = null;
+        step = 0;
     }
 
     public Path set(FullPath3d path) {
 
         fullPath3d = path;
+        step = 0;
         return this;
     }
 }
