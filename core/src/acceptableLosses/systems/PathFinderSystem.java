@@ -10,6 +10,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.Gdx;
 import com.stewsters.util.pathing.threeDimention.pathfinder.AStarPathFinder3d;
 import com.stewsters.util.pathing.threeDimention.pathfinder.PathFinder3d;
 import com.stewsters.util.pathing.threeDimention.shared.FullPath3d;
@@ -26,10 +27,13 @@ public class PathFinderSystem extends EntityProcessingSystem {
 
     private PathFinder3d pathFinder;
 
+    private Region region;
 
     public PathFinderSystem(Region region) {
         super(Aspect.getAspectForAll(Destination.class, Position.class));
-        pathFinder = new AStarPathFinder3d(region, region.xSize * region.ySize, true);
+        pathFinder = new AStarPathFinder3d(region, region.xSize * region.ySize, false);
+
+        this.region = region;
     }
 
     @Override
@@ -41,14 +45,19 @@ public class PathFinderSystem extends EntityProcessingSystem {
         FullPath3d path = pathFinder.findPath(new Mover3d() {
             @Override
             public boolean canTraverse(PathNode3d pathNode) {
-                return true;
+                return !region.tiles[pathNode.x][pathNode.y][pathNode.z].blocks;
             }
         }, position.x, position.y, position.z, destination.dest.x, destination.dest.y, destination.dest.z);
 
+
         if (path != null) {
-            e.edit().remove(Destination.class);
             e.edit().create(Path.class).set(path);
+            Gdx.app.log("PathFinderSystem", "Path created.");
+        } else {
+            Gdx.app.log("PathFinderSystem", "Could not path. Abandoned.");
         }
+        e.edit().remove(Destination.class);
+
 
     }
 }

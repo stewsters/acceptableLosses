@@ -5,10 +5,7 @@ import acceptableLosses.controls.InputManager;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
 import acceptableLosses.map.Spawner;
-import acceptableLosses.systems.AppearanceRenderSystem;
-import acceptableLosses.systems.ElevationSystem;
-import acceptableLosses.systems.MapRenderSystem;
-import acceptableLosses.systems.PathFinderSystem;
+import acceptableLosses.systems.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -35,6 +32,7 @@ public class GameScreen implements Screen {
 
     private AppearanceRenderSystem appearanceRenderSystem;
     private PathFinderSystem pathFinderSystem;
+    private MovementSystem movementSystem;
 
     public GameScreen(AcceptableLossesGame game) {
 
@@ -57,22 +55,36 @@ public class GameScreen implements Screen {
         elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
-        pathFinderSystem = region.world.setSystem(new PathFinderSystem(region));
+
+        // These should probably be pausable
+        pathFinderSystem = region.world.setSystem(new PathFinderSystem(region), true);
+        movementSystem = region.world.setSystem(new MovementSystem(region), true);
+
         region.world.initialize();
 
-
-        Spawner.spawnMan(region.world, 5, 5, zLevel);
-
+//        for (int i = 0; i < 10; i++) {
+            Spawner.spawnMan(region.world, 2, 2, zLevel);
+//        }
         inputManager = new InputManager(camera);
 
     }
 
+
+    long time=0;
 
     @Override
     public void render(float delta) {
 
         region.world.setDelta(delta);
         region.world.process();
+
+
+        // Dont run too fast
+        if(time + 100 < System.currentTimeMillis()) {
+            pathFinderSystem.process();
+            movementSystem.process();
+            time = System.currentTimeMillis();
+        }
 
         Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

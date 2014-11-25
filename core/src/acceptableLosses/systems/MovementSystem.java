@@ -11,7 +11,7 @@ import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
-import com.stewsters.util.pathing.threeDimention.shared.FullPath3d;
+import com.badlogic.gdx.math.MathUtils;
 
 public class MovementSystem extends EntityProcessingSystem {
 
@@ -58,9 +58,12 @@ public class MovementSystem extends EntityProcessingSystem {
                 path.step++;
             }
 
-        }else{
+        } else {
             //we are at destination
             e.edit().remove(Path.class);
+
+            //TODO: remove this
+            e.edit().create(Destination.class).set(MathUtils.random(1, 10), MathUtils.random(1, 10), 50);
         }
 
     }
