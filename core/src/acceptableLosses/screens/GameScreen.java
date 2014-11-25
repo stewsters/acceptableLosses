@@ -62,9 +62,9 @@ public class GameScreen implements Screen {
 
         region.world.initialize();
 
-//        for (int i = 0; i < 10; i++) {
-            Spawner.spawnMan(region.world, 2, 2, zLevel);
-//        }
+        for (int i = 0; i < 10; i++) {
+            Spawner.spawnMan(region.world, i, i, zLevel);
+        }
         inputManager = new InputManager(camera);
 
     }
