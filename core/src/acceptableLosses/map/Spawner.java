@@ -33,8 +33,7 @@ public class Spawner {
         else if (region.furniture[x][y][z] != null)
             return false;
 
-
-        region.furniture[x][y][z] = new Furniture(FurnitureType.AI_CORE);
+        region.furniture[x][y][z] = new Furniture(furnitureType);
         return true;
 
 //        Entity e = world.createEntity();

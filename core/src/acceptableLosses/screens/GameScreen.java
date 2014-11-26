@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.stewsters.util.math.MatUtils;
 
 
 public class GameScreen implements Screen {
@@ -72,8 +71,10 @@ public class GameScreen implements Screen {
             Spawner.spawnMan(region.world, i, i, zLevel);
         }
 
-        for (int i = 0; i < 5; i++) {
-            Spawner.spawnFurniture(region, 5, i + 2, zLevel, MatUtils.randVal(FurnitureType.values()));
+
+        for (int i = 0; i < FurnitureType.values().length; i++) {
+
+            Spawner.spawnFurniture(region, 5, i + 2, zLevel, FurnitureType.values()[i]);
         }
 
 

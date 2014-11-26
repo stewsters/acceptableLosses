@@ -9,7 +9,7 @@ public enum FurnitureType {
     AIRLOCK("airlock", "airlock", false),
     BED("bed", "bed", false),
     BLAST_DOOR_CLOSED("blast door closed", "blastDoorClosed", true),
-    BLAST_DOOR_OPEN("blast door opened", "blastDoorOpened", false),
+    BLAST_DOOR_OPEN("blast door opened", "blastDoorOpen", false),
     CRYOSTATIS_POD("cryostasis pod", "cryostatisPod", true),
     HATCH("hatch", "hatch", false),
     KITCHEN("kitchen", "kitchen", true),
