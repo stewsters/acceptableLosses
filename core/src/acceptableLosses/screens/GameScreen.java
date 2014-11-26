@@ -72,8 +72,8 @@ public class GameScreen implements Screen {
             Spawner.spawnMan(region.world, i, i, zLevel);
         }
 
-        for (int i = 0; i < 10; i++) {
-            Spawner.spawnFurniture(region, i + 1, i, zLevel, MatUtils.randVal(FurnitureType.values()));
+        for (int i = 0; i < 5; i++) {
+            Spawner.spawnFurniture(region, 5, i + 2, zLevel, MatUtils.randVal(FurnitureType.values()));
         }
 
 

@@ -62,12 +62,14 @@ public class Region implements TileBasedMap3d {
 
     @Override
     public boolean isBlocked(Mover3d mover, PathNode3d pathNode) {
-        return tiles[pathNode.x][pathNode.y][pathNode.z].blocks;
+
+        return isBlocked(mover, pathNode.x, pathNode.y, pathNode.z);
+
     }
 
     @Override
     public boolean isBlocked(Mover3d mover, int x, int y, int z) {
-        return tiles[x][y][z].blocks;
+        return tiles[x][y][z].blocks || (furniture[x][y][z] != null && furniture[x][y][z].furnitureType.blocks);
     }
 
     @Override
