@@ -1,7 +1,7 @@
 package acceptableLosses.systems;
 
 import acceptableLosses.map.Region;
-import acceptableLosses.map.TileType;
+import acceptableLosses.assets.TileType;
 import acceptableLosses.screens.GameScreen;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.Color;
@@ -25,8 +25,6 @@ public class MapRenderSystem extends VoidEntitySystem {
 
     @Override
     protected void processSystem() {
-
-        spriteBatch.setColor(Color.WHITE);
 
 
         // Don't use transparency... yet

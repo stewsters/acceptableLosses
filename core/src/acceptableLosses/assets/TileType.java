@@ -1,4 +1,4 @@
-package acceptableLosses.map;
+package acceptableLosses.assets;
 
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

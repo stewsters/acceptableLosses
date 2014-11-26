@@ -1,6 +1,7 @@
 package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
+import acceptableLosses.assets.FurnitureType;
 import acceptableLosses.controls.InputManager;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.stewsters.util.math.MatUtils;
 
 
 public class GameScreen implements Screen {
@@ -33,6 +35,8 @@ public class GameScreen implements Screen {
     private AppearanceRenderSystem appearanceRenderSystem;
     private PathFinderSystem pathFinderSystem;
     private MovementSystem movementSystem;
+    private FurnitureRenderSystem furnitureRenderSystem;
+
 
     public GameScreen(AcceptableLossesGame game) {
 
@@ -54,23 +58,31 @@ public class GameScreen implements Screen {
 
         elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
+        furnitureRenderSystem = new FurnitureRenderSystem(this, spriteBatch, region);
+
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
 
         // These should probably be pausable
         pathFinderSystem = region.world.setSystem(new PathFinderSystem(region), true);
         movementSystem = region.world.setSystem(new MovementSystem(region), true);
-
+        ;
         region.world.initialize();
 
         for (int i = 0; i < 10; i++) {
             Spawner.spawnMan(region.world, i, i, zLevel);
         }
+
+        for (int i = 0; i < 10; i++) {
+            Spawner.spawnFurniture(region, i + 1, i, zLevel, MatUtils.randVal(FurnitureType.values()));
+        }
+
+
         inputManager = new InputManager(camera);
 
     }
 
 
-    long time=0;
+    long time = 0;
 
     @Override
     public void render(float delta) {
@@ -80,7 +92,7 @@ public class GameScreen implements Screen {
 
 
         // Dont run too fast
-        if(time + 100 < System.currentTimeMillis()) {
+        if (time + 100 < System.currentTimeMillis()) {
             pathFinderSystem.process();
             movementSystem.process();
             time = System.currentTimeMillis();
@@ -101,6 +113,7 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
 
         mapRenderSystem.process();
+        furnitureRenderSystem.process();
         appearanceRenderSystem.process();
 
 

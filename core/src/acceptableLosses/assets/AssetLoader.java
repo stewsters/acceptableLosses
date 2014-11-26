@@ -1,7 +1,6 @@
 package acceptableLosses.assets;
 
 
-import acceptableLosses.map.TileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
@@ -16,6 +15,10 @@ public class AssetLoader {
         for (TileType tileType : TileType.values()) {
             tileType.texture = atlas.findRegion("wall/" + tileType.textureName);
             tileType.floor = atlas.findRegion("floor/" + tileType.textureName);
+        }
+
+        for(FurnitureType furnitureType : FurnitureType.values()){
+            furnitureType.texture = atlas.findRegion("building/" + furnitureType.textureName);
         }
 
     }

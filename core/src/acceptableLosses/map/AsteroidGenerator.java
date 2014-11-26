@@ -1,7 +1,7 @@
 package acceptableLosses.map;
 
 
-import com.badlogic.gdx.Gdx;
+import acceptableLosses.assets.TileType;
 import com.stewsters.util.noise.OpenSimplexNoise;
 
 public class AsteroidGenerator {

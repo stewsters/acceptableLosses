@@ -42,6 +42,18 @@ public class PathFinderSystem extends EntityProcessingSystem {
         Destination destination = destinationComponentMapper.get(e);
         Position position = positionComponentMapper.get(e);
 
+
+        if (destination.dest.x == position.x &&
+            destination.dest.y == position.y &&
+            destination.dest.z == position.z) {
+
+            Gdx.app.log("PathFinderSystem", "Already there.");
+
+            e.edit().remove(Destination.class);
+            return;
+        }
+
+
         FullPath3d path = pathFinder.findPath(new Mover3d() {
             @Override
             public boolean canTraverse(PathNode3d pathNode) {
