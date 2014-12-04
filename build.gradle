@@ -68,7 +68,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "net.onedaybeard.artemis:artemis-odb:0.8.1"
-        compile "com.stewsters.util:stewsters-util:0.9"
+        compile "com.stewsters.util:stewsters-util:0.10"
     }
 }
 
