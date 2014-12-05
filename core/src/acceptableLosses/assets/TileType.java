@@ -7,7 +7,9 @@ public enum TileType {
 
     VACUUM("Vacuum", null, false),
     SILICON_ORE("Silicon Ore", "silicon", true),
-    CARBON_ORE("Carbon Ore", "carbon", true);
+    CARBON_ORE("Carbon Ore", "carbon", true),
+    METAL_ORE("Metal Ore", "metal", true),
+    ICE("Ice", "ice", true);
 
     public final String name;
     public final String textureName;
