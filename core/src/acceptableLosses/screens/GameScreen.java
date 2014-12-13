@@ -32,6 +32,8 @@ public class GameScreen implements Screen {
     private MapRenderSystem mapRenderSystem;
 
     private AppearanceRenderSystem appearanceRenderSystem;
+
+    private AiSystem aiSystem;
     private PathFinderSystem pathFinderSystem;
     private MovementSystem movementSystem;
     private FurnitureRenderSystem furnitureRenderSystem;
@@ -45,7 +47,7 @@ public class GameScreen implements Screen {
         shapeRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
-        camera.position.set(250 * 16, 250 * 16, 0);
+        camera.position.set(250, 250, 0);
         camera.zoom = 0.5f;
 
         hudCam = new OrthographicCamera();
@@ -62,9 +64,10 @@ public class GameScreen implements Screen {
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
 
         // These should probably be pausable
+        aiSystem = region.world.setSystem(new AiSystem(), true);
         pathFinderSystem = region.world.setSystem(new PathFinderSystem(region), true);
         movementSystem = region.world.setSystem(new MovementSystem(region), true);
-        ;
+
         region.world.initialize();
 
         for (int i = 0; i < 10; i++) {
@@ -94,6 +97,7 @@ public class GameScreen implements Screen {
 
         // Dont run too fast
         if (time + 100 < System.currentTimeMillis()) {
+            aiSystem.process();
             pathFinderSystem.process();
             movementSystem.process();
             time = System.currentTimeMillis();

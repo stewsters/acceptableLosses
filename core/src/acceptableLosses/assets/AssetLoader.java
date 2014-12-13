@@ -17,7 +17,7 @@ public class AssetLoader {
             tileType.floor = atlas.findRegion("floor/" + tileType.textureName);
         }
 
-        for(FurnitureType furnitureType : FurnitureType.values()){
+        for (FurnitureType furnitureType : FurnitureType.values()) {
             furnitureType.texture = atlas.findRegion("building/" + furnitureType.textureName);
         }
 

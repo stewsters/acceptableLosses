@@ -3,10 +3,7 @@ package acceptableLosses.map;
 
 import acceptableLosses.assets.AssetLoader;
 import acceptableLosses.assets.FurnitureType;
-import acceptableLosses.components.Appearance;
-import acceptableLosses.components.Destination;
-import acceptableLosses.components.Health;
-import acceptableLosses.components.Position;
+import acceptableLosses.components.*;
 import com.artemis.Entity;
 import com.artemis.World;
 import com.badlogic.gdx.math.MathUtils;
@@ -19,7 +16,7 @@ public class Spawner {
         e.edit().create(Position.class).set(x, y, z);
         e.edit().create(Health.class).set(10, 10);
         e.edit().create(Appearance.class).set(AssetLoader.atlas.findRegion("character/parts/body/maleBody"));
-        e.edit().create(Destination.class).set(MathUtils.random(1, 10), MathUtils.random(1, 10), z);
+        e.edit().create(Sentience.class);
         return e;
     }
 

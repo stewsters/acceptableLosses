@@ -44,8 +44,8 @@ public class PathFinderSystem extends EntityProcessingSystem {
 
 
         if (destination.dest.x == position.x &&
-            destination.dest.y == position.y &&
-            destination.dest.z == position.z) {
+                destination.dest.y == position.y &&
+                destination.dest.z == position.z) {
 
             Gdx.app.log("PathFinderSystem", "Already there.");
 

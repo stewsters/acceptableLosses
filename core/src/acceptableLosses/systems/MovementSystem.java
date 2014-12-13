@@ -38,32 +38,31 @@ public class MovementSystem extends EntityProcessingSystem {
 
             // See if we can travel there
             if (region.tiles[path.fullPath3d.getX(path.step)]
-                [path.fullPath3d.getY(path.step)]
-                [path.fullPath3d.getZ(path.step)].blocks) {
+                    [path.fullPath3d.getY(path.step)]
+                    [path.fullPath3d.getZ(path.step)].blocks) {
 
                 e.edit().remove(Path.class);
                 e.edit().create(Destination.class).set(
-                    path.fullPath3d.getX(path.fullPath3d.getLength() - 1),
-                    path.fullPath3d.getY(path.fullPath3d.getLength() - 1),
-                    path.fullPath3d.getZ(path.fullPath3d.getLength() - 1));
+                        path.fullPath3d.getX(path.fullPath3d.getLength() - 1),
+                        path.fullPath3d.getY(path.fullPath3d.getLength() - 1),
+                        path.fullPath3d.getZ(path.fullPath3d.getLength() - 1));
 
                 Gdx.app.debug("MovementSystem", "Cannot follow path, signaling a repath");
 
             } else {
                 //move
                 position.set(
-                    path.fullPath3d.getX(path.step),
-                    path.fullPath3d.getY(path.step),
-                    path.fullPath3d.getZ(path.step));
+                        path.fullPath3d.getX(path.step),
+                        path.fullPath3d.getY(path.step),
+                        path.fullPath3d.getZ(path.step));
                 path.step++;
             }
 
         } else {
             //we are at destination
             e.edit().remove(Path.class);
+            //TODO: do we want to do something here?
 
-            //TODO: remove this
-            e.edit().create(Destination.class).set(MathUtils.random(1, 10), MathUtils.random(1, 10), 50);
         }
 
     }

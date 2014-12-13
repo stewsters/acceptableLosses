@@ -9,8 +9,6 @@ import java.util.LinkedList;
 
 public class MapTools {
 
-    public static final int xTileScale = 16;
-    public static final int yTileScale = 16;
 
     public static Vector2 getDirectionVector(int x1, int y1, int x2, int y2) {
         Vector2 cell1 = world2window(x1, y1);
@@ -49,20 +47,18 @@ public class MapTools {
         Vector3 pos = new Vector3(x, y, 0);
         camera.unproject(pos);
 
-        return new Point2i((int) ((pos.x / xTileScale) + 0.5), (int) ((pos.y / yTileScale) + 0.5));
+        return new Point2i((int) ((pos.x ) + 0.5), (int) ((pos.y ) + 0.5));
     }
 
     public static Vector2 world2window(float x, float y) {
 
-        float posX = x * xTileScale;
-        float posY = y * yTileScale;
 
-        return new Vector2(posX, posY);
+        return new Vector2(x, y);
     }
 
 
     public static Point2i libgdx2world(float x, float y) {
-        return new Point2i((int) (x / xTileScale), (int) (y / yTileScale));
+        return new Point2i((int) (x ), (int) (y ));
     }
 }
 

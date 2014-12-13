@@ -16,6 +16,7 @@ public class AsteroidGenerator {
         float oreClumpRandomness = 10f;
         return generateGeneralAsteroid(region, xCenter, yCenter, zCenter, radius, radiusRange, edgeRandomness, oreClumpRandomness);
     }
+
     public static Region generateGeneralAsteroid(Region region, int xCenter, int yCenter, int zCenter, int radius, float radiusRange, float edgeRandomness, float oreClumpRandomness) {
 
         OpenSimplexNoise openSimplexNoise = new OpenSimplexNoise();

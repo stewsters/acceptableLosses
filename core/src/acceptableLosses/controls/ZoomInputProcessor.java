@@ -16,7 +16,7 @@ public class ZoomInputProcessor implements InputProcessor {
     public boolean scrolled(int dd) {
         if (dd > 0f && camera.zoom < 1f)
             camera.zoom += dd * zoomFactor * camera.zoom;
-        else if (dd < 0f && camera.zoom > 0.1f) {
+        else if (dd < 0f && camera.zoom > 0.01f) {
             camera.zoom += dd * zoomFactor * camera.zoom;
         }
         return false;
