@@ -23,4 +23,7 @@ public class Destination extends PooledComponent {
         return this;
     }
 
+    public Destination set(Point3i target) {
+        return set(target.x, target.y, target.z);
+    }
 }

@@ -3,10 +3,12 @@ package acceptableLosses.map;
 
 import acceptableLosses.assets.AssetLoader;
 import acceptableLosses.assets.FurnitureType;
-import acceptableLosses.components.*;
+import acceptableLosses.components.Appearance;
+import acceptableLosses.components.Health;
+import acceptableLosses.components.Position;
+import acceptableLosses.components.Sentience;
 import com.artemis.Entity;
 import com.artemis.World;
-import com.badlogic.gdx.math.MathUtils;
 
 public class Spawner {
 
@@ -32,11 +34,6 @@ public class Spawner {
 
         region.furniture[x][y][z] = new Furniture(furnitureType);
         return true;
-
-//        Entity e = world.createEntity();
-//        e.edit().create(Position.class).set(x, y, z);
-//        e.edit().create(Appearance.class).set(AssetLoader.atlas.findRegion("building/aiCore"));
-//        return e;
 
     }
 

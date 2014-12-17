@@ -34,6 +34,7 @@ public class GameScreen implements Screen {
     private AppearanceRenderSystem appearanceRenderSystem;
 
     private AiSystem aiSystem;
+    private JobAssignerSystem jobAssignerSystem;
     private PathFinderSystem pathFinderSystem;
     private MovementSystem movementSystem;
     private FurnitureRenderSystem furnitureRenderSystem;
@@ -48,7 +49,7 @@ public class GameScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.position.set(250, 250, 0);
-        camera.zoom = 0.5f;
+        camera.zoom = 0.1f;
 
         hudCam = new OrthographicCamera();
 
@@ -64,7 +65,8 @@ public class GameScreen implements Screen {
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
 
         // These should probably be pausable
-        aiSystem = region.world.setSystem(new AiSystem(), true);
+        aiSystem = region.world.setSystem(new AiSystem(region), true);
+        jobAssignerSystem = region.world.setSystem(new JobAssignerSystem(region), true);
         pathFinderSystem = region.world.setSystem(new PathFinderSystem(region), true);
         movementSystem = region.world.setSystem(new MovementSystem(region), true);
 
@@ -98,6 +100,7 @@ public class GameScreen implements Screen {
         // Dont run too fast
         if (time + 100 < System.currentTimeMillis()) {
             aiSystem.process();
+            jobAssignerSystem.process();
             pathFinderSystem.process();
             movementSystem.process();
             time = System.currentTimeMillis();

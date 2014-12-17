@@ -2,7 +2,9 @@ package acceptableLosses.map;
 
 
 import acceptableLosses.assets.TileType;
+import acceptableLosses.work.jobs.Job;
 import com.artemis.World;
+import com.stewsters.util.math.Point3i;
 import com.stewsters.util.pathing.threeDimention.shared.Mover3d;
 import com.stewsters.util.pathing.threeDimention.shared.PathNode3d;
 import com.stewsters.util.pathing.threeDimention.shared.TileBasedMap3d;
@@ -11,6 +13,7 @@ public class Region implements TileBasedMap3d {
 
     public final TileType[][][] tiles;
     public final Furniture[][][] furniture;
+    public final Job[][][] jobs;
 
     public final int xSize;
     public final int ySize;
@@ -25,6 +28,7 @@ public class Region implements TileBasedMap3d {
 
         tiles = new TileType[xSize][ySize][zSize];
         furniture = new Furniture[xSize][ySize][zSize];
+        jobs = new Job[xSize][ySize][zSize];
 
         for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
@@ -80,5 +84,22 @@ public class Region implements TileBasedMap3d {
 
     public boolean isOutsideMap(int x, int y, int z) {
         return (x < 0 || x >= xSize || y < 0 || y >= ySize);
+    }
+
+
+    public Job getJobAt(int x, int y, int z) {
+        if (isOutsideMap(x, y, z))
+            return null;
+
+        return jobs[x][y][z];
+    }
+
+    public void removeJob(Job job) {
+
+        Point3i p = job.getStartPos();
+        if (isOutsideMap(p.x, p.y, p.z))
+            return;
+        else
+            jobs[p.x][p.y][p.z] = null;
     }
 }

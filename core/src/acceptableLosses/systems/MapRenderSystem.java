@@ -39,17 +39,17 @@ public class MapRenderSystem extends VoidEntitySystem {
                 if (tileType.texture != null) {
 
                     spriteBatch.setColor(1, 1, 1, 1);
-                    spriteBatch.draw(tileType.texture,  x, y, 1, 1);
+                    spriteBatch.draw(tileType.texture, x, y, 1, 1);
 
                 } else if (gameScreen.zLevel - 1 >= 0 && region.tiles[x][y][gameScreen.zLevel - 1].floor != null) {
 
                     spriteBatch.setColor(0.5f, 0.5f, 0.5f, 1);
-                    spriteBatch.draw(region.tiles[x][y][gameScreen.zLevel - 1].floor, x,  y, 1, 1);
+                    spriteBatch.draw(region.tiles[x][y][gameScreen.zLevel - 1].floor, x, y, 1, 1);
 
                 } else if (gameScreen.zLevel - 2 >= 0 && region.tiles[x][y][gameScreen.zLevel - 2].floor != null) {
 
                     spriteBatch.setColor(0.25f, 0.25f, 0.25f, 1);
-                    spriteBatch.draw(region.tiles[x][y][gameScreen.zLevel - 2].floor,  x,  y, 1, 1);
+                    spriteBatch.draw(region.tiles[x][y][gameScreen.zLevel - 2].floor, x, y, 1, 1);
                 }
 
             }

@@ -47,7 +47,7 @@ public class MapTools {
         Vector3 pos = new Vector3(x, y, 0);
         camera.unproject(pos);
 
-        return new Point2i((int) ((pos.x ) + 0.5), (int) ((pos.y ) + 0.5));
+        return new Point2i((int) ((pos.x) + 0.5), (int) ((pos.y) + 0.5));
     }
 
     public static Vector2 world2window(float x, float y) {
@@ -58,7 +58,7 @@ public class MapTools {
 
 
     public static Point2i libgdx2world(float x, float y) {
-        return new Point2i((int) (x ), (int) (y ));
+        return new Point2i((int) (x), (int) (y));
     }
 }
 

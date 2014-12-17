@@ -33,7 +33,7 @@ public class FurnitureRenderSystem extends VoidEntitySystem {
                 Furniture furniture = region.furniture[x][y][gameScreen.zLevel];
                 if (furniture != null && furniture.furnitureType != null && furniture.furnitureType.texture != null) {
 
-                    spriteBatch.draw(furniture.furnitureType.texture,  x,  y, 1, 1);
+                    spriteBatch.draw(furniture.furnitureType.texture, x, y, 1, 1);
                 }
 
             }

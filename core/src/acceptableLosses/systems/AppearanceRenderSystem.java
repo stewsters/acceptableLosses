@@ -41,7 +41,7 @@ public class AppearanceRenderSystem extends EntityProcessingSystem {
 
         Appearance appearance = am.get(e);
         spriteBatch.setColor(1, 1, 1, 1);
-        spriteBatch.draw(appearance.textureRegion,  position.x,  position.y, 1, 1);
+        spriteBatch.draw(appearance.textureRegion, position.x, position.y, 1, 1);
 
 
     }

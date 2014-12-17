@@ -4,6 +4,8 @@ package acceptableLosses.map;
 import com.badlogic.gdx.Gdx;
 import com.stewsters.util.math.Point3i;
 import acceptableLosses.assets.TileType;
+import acceptableLosses.work.jobs.DigJob;
+import com.stewsters.util.math.Point3i;
 import com.stewsters.util.noise.OpenSimplexNoise;
 
 public class AsteroidGenerator {
@@ -39,6 +41,19 @@ public class AsteroidGenerator {
                 }
             }
         }
+
+
+        // TODO: remove this.  This mines the whole asteroid
+        for (int x = 0; x < region.xSize; x++) {
+            for (int y = 0; y < region.ySize; y++) {
+                for (int z = 0; z < region.zSize; z++) {
+
+                    if (region.tiles[x][y][z].blocks == true)
+                        region.jobs[x][y][z] = new DigJob(region, new Point3i(x, y, z));
+                }
+            }
+        }
+
 
         return region;
     }
