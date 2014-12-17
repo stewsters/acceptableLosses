@@ -1,8 +1,6 @@
 package acceptableLosses.map;
 
 
-import com.badlogic.gdx.Gdx;
-import com.stewsters.util.math.Point3i;
 import acceptableLosses.assets.TileType;
 import acceptableLosses.work.jobs.DigJob;
 import com.stewsters.util.math.Point3i;
@@ -18,6 +16,7 @@ public class AsteroidGenerator {
         float oreClumpRandomness = 10f;
         return generateGeneralAsteroid(region, center, radius, radiusRange, edgeRandomness, oreClumpRandomness);
     }
+
     public static Region generateGeneralAsteroid(Region region, Point3i center, int radius, float radiusRange, float edgeRandomness, float oreClumpRandomness) {
 
         OpenSimplexNoise openSimplexNoise = new OpenSimplexNoise();
@@ -48,7 +47,7 @@ public class AsteroidGenerator {
             for (int y = 0; y < region.ySize; y++) {
                 for (int z = 0; z < region.zSize; z++) {
 
-                    if (region.tiles[x][y][z].blocks == true)
+                    if (region.tiles[x][y][z].blocks)
                         region.jobs[x][y][z] = new DigJob(region, new Point3i(x, y, z));
                 }
             }

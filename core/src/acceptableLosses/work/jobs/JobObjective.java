@@ -23,14 +23,14 @@ public class JobObjective implements Objective3d {
         //TODO: check to see if there is a job here that we can do.
 
         Job job = region.getJobAt(current.x, current.y, current.z);
-        if (job != null && job.satisfiedBy(resume)) {
+        if (job != null && job.satisfiedBy(resume) && job.getAssignee() == 0) {
             return true;
         }
 
         for (Facing3d facing3d : Facing3d.values()) {
 
             job = region.getJobAt(current.x + facing3d.x, current.y + facing3d.y, current.z + facing3d.z);
-            if (job != null && job.satisfiedBy(resume)) {
+            if (job != null && job.satisfiedBy(resume) && job.getAssignee() == 0) {
                 return true;
             }
         }

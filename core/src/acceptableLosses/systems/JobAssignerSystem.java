@@ -1,8 +1,6 @@
 package acceptableLosses.systems;
 
-import acceptableLosses.components.Position;
-import acceptableLosses.components.Resume;
-import acceptableLosses.components.Task;
+import acceptableLosses.components.*;
 import acceptableLosses.map.Region;
 import acceptableLosses.work.CivilianMover;
 import acceptableLosses.work.jobs.Job;
@@ -12,6 +10,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.Gdx;
 import com.stewsters.util.math.Facing3d;
 import com.stewsters.util.pathing.threeDimention.searcher.DjikstraSearcher3d;
 import com.stewsters.util.pathing.threeDimention.shared.FullPath3d;
@@ -30,8 +29,8 @@ public class JobAssignerSystem extends EntityProcessingSystem {
     ComponentMapper<Position> positionComponentMapper;
 
     public JobAssignerSystem(Region region) {
-        super(Aspect.getAspectForAll(Resume.class, Position.class));
-        searcher = new DjikstraSearcher3d(region, 100, false);
+        super(Aspect.getAspectForAll(Resume.class, Sentience.class, Position.class));
+        searcher = new DjikstraSearcher3d(region, 10000, false);
         this.region = region;
     }
 
@@ -47,7 +46,6 @@ public class JobAssignerSystem extends EntityProcessingSystem {
                 new JobObjective(region, resume)
         );
 
-        e.edit().remove(Resume.class);
 
         if (fullPath3d != null) {
             // we are near a potential job, find it.
@@ -69,9 +67,15 @@ public class JobAssignerSystem extends EntityProcessingSystem {
                 // TODO: Add Task to player containing the job
                 job.setAssignee(e.getId());
                 e.edit().create(Task.class).set(job);
+                e.edit().create(Path.class).set(fullPath3d);
+            } else {
+                Gdx.app.log(this.getClass().getName(), "There is a path, but no jerbs");
             }
 
+        } else {
+            Gdx.app.log(this.getClass().getName(), "There is no path to a job");
         }
+        e.edit().remove(Resume.class);
 
 
     }

@@ -7,6 +7,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.Gdx;
 
 /**
  * This controls the ai of sentient creatures.
@@ -58,8 +59,9 @@ public class AiSystem extends EntityProcessingSystem {
                     e.edit().create(Resume.class);
 
             } else {
-                Position position = positionComponentMapper.get(e);
+                // We have a task
 
+                Position position = positionComponentMapper.get(e);
 
                 int distanceToTask = Math.abs(position.x - task.job.getStartPos().x) +
                         Math.abs(position.y - task.job.getStartPos().y) +
@@ -67,13 +69,12 @@ public class AiSystem extends EntityProcessingSystem {
 
                 if (distanceToTask <= task.job.getWorkDistance()) {
                     // if we are close enough, do the task
-
                     region.removeJob(task.job);
-
                     e.edit().remove(Task.class);
 
                 } else if (task != null) {
                     // do it
+                    Gdx.app.log(this.getClass().getName(), "Setting work destination : " + task.job.getStartPos());
                     e.edit().create(Destination.class).set(task.job.getStartPos());
                 }
 

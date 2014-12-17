@@ -14,6 +14,7 @@ public class DigJob implements Job {
     public DigJob(Region region, Point3i startPos) {
         this.region = region;
         this.startPos = startPos;
+        this.assignee = 0;
     }
 
     @Override

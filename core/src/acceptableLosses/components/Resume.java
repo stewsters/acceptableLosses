@@ -6,7 +6,7 @@ public class Resume extends PooledComponent {
 
 
     // This will contain parameters on what kind of jobs we want to look for
-    public boolean canDig;
+    public boolean canDig = true;
 
 
     @Override
