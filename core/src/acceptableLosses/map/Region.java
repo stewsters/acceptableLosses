@@ -83,7 +83,7 @@ public class Region implements TileBasedMap3d {
     }
 
     public boolean isOutsideMap(int x, int y, int z) {
-        return (x < 0 || x >= xSize || y < 0 || y >= ySize);
+        return (x < 0 || x >= xSize || y < 0 || y >= ySize || z < 0 || z >= zSize);
     }
 
 
