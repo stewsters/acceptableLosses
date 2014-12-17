@@ -1,23 +1,22 @@
 package acceptableLosses.map;
 
 
+import com.badlogic.gdx.Gdx;
+import com.stewsters.util.math.Point3i;
 import acceptableLosses.assets.TileType;
 import com.stewsters.util.noise.OpenSimplexNoise;
 
 public class AsteroidGenerator {
 
     public static Region generateBasicAsteroid(Region region) {
-        int xCenter = region.xSize / 2;
-        int yCenter = region.ySize / 2;
-        int zCenter = region.zSize / 2;
+        Point3i center = new Point3i(region.xSize / 2, region.ySize / 2, region.zSize / 2);
         int radius = Math.max(region.xSize, Math.max(region.ySize, region.zSize)) / 4;  //diameter is half the total space
         float radiusRange = radius / 25f;
         float edgeRandomness = 5f;
         float oreClumpRandomness = 10f;
-        return generateGeneralAsteroid(region, xCenter, yCenter, zCenter, radius, radiusRange, edgeRandomness, oreClumpRandomness);
+        return generateGeneralAsteroid(region, center, radius, radiusRange, edgeRandomness, oreClumpRandomness);
     }
-
-    public static Region generateGeneralAsteroid(Region region, int xCenter, int yCenter, int zCenter, int radius, float radiusRange, float edgeRandomness, float oreClumpRandomness) {
+    public static Region generateGeneralAsteroid(Region region, Point3i center, int radius, float radiusRange, float edgeRandomness, float oreClumpRandomness) {
 
         OpenSimplexNoise openSimplexNoise = new OpenSimplexNoise();
         OpenSimplexNoise alternateOpenSimplexNoise = new OpenSimplexNoise();
@@ -25,9 +24,9 @@ public class AsteroidGenerator {
             for (int y = 0; y < region.ySize; y++) {
                 for (int z = 0; z < region.zSize; z++) {
 
-                    int distSquared = ((x - xCenter) * (x - xCenter)) +
-                            ((y - yCenter) * (y - yCenter)) +
-                            ((z - zCenter) * (z - zCenter));
+                    int distSquared = ((x - center.x) * (x - center.x)) +
+                            ((y - center.y) * (y - center.y)) +
+                            ((z - center.z) * (z - center.z));
                     double randomValue = openSimplexNoise.eval(x / edgeRandomness, y / edgeRandomness, z / edgeRandomness);
                     double randomRadius = radius + (randomValue * radiusRange);
 
