@@ -48,7 +48,8 @@ public class AsteroidGenerator {
                 for (int z = 0; z < region.zSize; z++) {
 
                     if (region.tiles[x][y][z].blocks)
-                        region.jobs[x][y][z] = new DigJob(region, new Point3i(x, y, z));
+                        region.addJob(new DigJob(region, new Point3i(x, y, z)));
+
                 }
             }
         }

@@ -40,11 +40,12 @@ public class MovementSystem extends EntityProcessingSystem {
                     [path.fullPath3d.getY(path.step)]
                     [path.fullPath3d.getZ(path.step)].blocks) {
 
-                e.edit().remove(Path.class);
                 e.edit().create(Destination.class).set(
                         path.fullPath3d.getX(path.fullPath3d.getLength() - 1),
                         path.fullPath3d.getY(path.fullPath3d.getLength() - 1),
                         path.fullPath3d.getZ(path.fullPath3d.getLength() - 1));
+
+                e.edit().remove(Path.class);
 
                 Gdx.app.debug("MovementSystem", "Cannot follow path, signaling a repath");
 

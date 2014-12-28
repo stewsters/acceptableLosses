@@ -2,6 +2,7 @@ package acceptableLosses.map;
 
 
 import acceptableLosses.assets.TileType;
+import acceptableLosses.work.jobs.DigJob;
 import acceptableLosses.work.jobs.Job;
 import com.artemis.World;
 import com.stewsters.util.math.Point3i;
@@ -101,5 +102,10 @@ public class Region implements TileBasedMap3d {
             return;
         else
             jobs[p.x][p.y][p.z] = null;
+    }
+
+    public void addJob(Job job) {
+        Point3i p = job.getStartPos();
+        jobs[p.x][p.y][p.z] = job;
     }
 }
