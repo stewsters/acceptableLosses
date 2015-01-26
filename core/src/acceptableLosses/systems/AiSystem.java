@@ -19,6 +19,7 @@ public class AiSystem extends EntityProcessingSystem {
 
 
     private final Region region;
+    private final JobAssignerSystem jobAssignerSystem;
 
     @Wire
     ComponentMapper<Path> pathComponentMapper;
@@ -35,9 +36,10 @@ public class AiSystem extends EntityProcessingSystem {
     ComponentMapper<Resume> resumeComponentMapper;
 
 
-    public AiSystem(Region region) {
+    public AiSystem(Region region, JobAssignerSystem jobAssignerSystem) {
         super(Aspect.getAspectForAll(Sentience.class, Position.class));
         this.region = region;
+        this.jobAssignerSystem=jobAssignerSystem;
     }
 
     @Override
@@ -69,7 +71,7 @@ public class AiSystem extends EntityProcessingSystem {
 
                 if (distanceToTask <= task.job.getWorkDistance()) {
                     // if we are close enough, do the task
-                    region.removeJob(task.job);
+                    jobAssignerSystem.remove(task.job);
                     e.edit().remove(Task.class);
 
                 } else if (task != null) {

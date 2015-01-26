@@ -34,7 +34,7 @@ public class SplashScreen implements Screen {
 
         spriteBatch.end();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isTouched()) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isTouched()) {
             game.setScreen(new GameScreen(game));
         }
     }

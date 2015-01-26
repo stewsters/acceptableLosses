@@ -42,19 +42,6 @@ public class AsteroidGenerator {
         }
 
 
-        // TODO: remove this.  This mines the whole asteroid
-        for (int x = 0; x < region.xSize; x++) {
-            for (int y = 0; y < region.ySize; y++) {
-                for (int z = 0; z < region.zSize; z++) {
-
-                    if (region.tiles[x][y][z].blocks)
-                        region.addJob(new DigJob(region, new Point3i(x, y, z)));
-
-                }
-            }
-        }
-
-
         return region;
     }
 }

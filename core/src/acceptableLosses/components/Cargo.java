@@ -20,5 +20,6 @@ public class Cargo extends PooledComponent {
 
     @Override
     protected void reset() {
+        containedEntities.clear();
     }
 }

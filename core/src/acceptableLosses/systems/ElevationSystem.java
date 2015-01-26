@@ -22,9 +22,9 @@ public class ElevationSystem extends VoidEntitySystem {
 
     @Override
     protected void processSystem() {
-        if (Gdx.input.isKeyPressed(Input.Keys.COMMA)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.COMMA)) {
             gameScreen.zLevel = Math.min(gameScreen.zLevel + 1, region.zSize - 1);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.PERIOD)) {
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.PERIOD)) {
             gameScreen.zLevel = Math.max(gameScreen.zLevel - 1, 0);
         }
     }

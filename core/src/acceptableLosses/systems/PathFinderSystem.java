@@ -5,6 +5,7 @@ import acceptableLosses.components.Destination;
 import acceptableLosses.components.Path;
 import acceptableLosses.components.Position;
 import acceptableLosses.map.Region;
+import acceptableLosses.pathing.FastNonOptimalHeuristic;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
@@ -31,7 +32,7 @@ public class PathFinderSystem extends EntityProcessingSystem {
 
     public PathFinderSystem(Region region) {
         super(Aspect.getAspectForAll(Destination.class, Position.class));
-        pathFinder = new AStarPathFinder3d(region, region.xSize * region.ySize, false);
+        pathFinder = new AStarPathFinder3d(region, region.xSize * region.ySize, false, new FastNonOptimalHeuristic());
 
         this.region = region;
     }
