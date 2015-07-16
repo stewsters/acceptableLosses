@@ -39,7 +39,7 @@ public class AiSystem extends EntityProcessingSystem {
     public AiSystem(Region region, JobAssignerSystem jobAssignerSystem) {
         super(Aspect.getAspectForAll(Sentience.class, Position.class));
         this.region = region;
-        this.jobAssignerSystem=jobAssignerSystem;
+        this.jobAssignerSystem = jobAssignerSystem;
     }
 
     @Override
@@ -79,13 +79,10 @@ public class AiSystem extends EntityProcessingSystem {
                     Gdx.app.log(this.getClass().getName(), "Setting work destination : " + task.job.getStartPos());
                     e.edit().create(Destination.class).set(task.job.getStartPos());
                 }
+//                else
+//                    e.edit().create(Destination.class).set(MathUtils.random(1, 10), MathUtils.random(1, 10), 50);
 
             }
-//            else {
-
-            // else wander
-//                e.edit().create(Destination.class).set(MathUtils.random(1, 10), MathUtils.random(1, 10), 50);
-//            }
 
         }
 

@@ -44,9 +44,9 @@ public class PathFinderSystem extends EntityProcessingSystem {
         Position position = positionComponentMapper.get(e);
 
 
-        if (destination.dest.x == position.x &&
-                destination.dest.y == position.y &&
-                destination.dest.z == position.z) {
+        if (destination.destination.x == position.x &&
+                destination.destination.y == position.y &&
+                destination.destination.z == position.z) {
 
             Gdx.app.log("PathFinderSystem", "Already there.");
 
@@ -60,17 +60,16 @@ public class PathFinderSystem extends EntityProcessingSystem {
             public boolean canTraverse(PathNode3d pathNode) {
                 return !region.tiles[pathNode.x][pathNode.y][pathNode.z].blocks;
             }
-        }, position.x, position.y, position.z, destination.dest.x, destination.dest.y, destination.dest.z);
+        }, position.x, position.y, position.z, destination.destination.x, destination.destination.y, destination.destination.z);
 
 
-        if (path != null) {
+        if (path == null) {
+            Gdx.app.log("PathFinderSystem", "Could not path. Abandoned.");
+        } else {
             e.edit().create(Path.class).set(path);
             Gdx.app.log("PathFinderSystem", "Path created.");
-        } else {
-            Gdx.app.log("PathFinderSystem", "Could not path. Abandoned.");
         }
         e.edit().remove(Destination.class);
-
 
     }
 }

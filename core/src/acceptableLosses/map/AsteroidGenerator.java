@@ -2,7 +2,6 @@ package acceptableLosses.map;
 
 
 import acceptableLosses.assets.TileType;
-import acceptableLosses.work.jobs.DigJob;
 import com.stewsters.util.math.Point3i;
 import com.stewsters.util.noise.OpenSimplexNoise;
 

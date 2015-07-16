@@ -19,7 +19,21 @@ public class DigJob implements Job {
 
     @Override
     public boolean satisfiedBy(Resume resume) {
-        return resume.canDig;
+
+        if (!resume.canDig) {
+            //dont dig
+            return false;
+        }
+
+        for (Point3i pos : startPos.mooreNeighborhood3D()) {
+
+            if (!region.isBlocked(resume.mover3d, pos.x, pos.y, pos.z)) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
     @Override

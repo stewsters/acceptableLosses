@@ -2,6 +2,7 @@ package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
 import acceptableLosses.assets.FurnitureType;
+import acceptableLosses.assets.TileType;
 import acceptableLosses.controls.InputManager;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
@@ -69,28 +70,33 @@ public class GameScreen implements Screen {
         // These should probably be pausable
 
         jobAssignerSystem = region.world.setSystem(new JobAssignerSystem(region), true);
-        aiSystem = region.world.setSystem(new AiSystem(region,jobAssignerSystem), true);
+        aiSystem = region.world.setSystem(new AiSystem(region, jobAssignerSystem), true);
         pathFinderSystem = region.world.setSystem(new PathFinderSystem(region), true);
         movementSystem = region.world.setSystem(new MovementSystem(region), true);
 
         region.world.initialize();
 
 
+        Point3i center = new Point3i(region.xSize / 2, region.ySize / 2, region.zSize / 2);
+
+        region.tiles[center.x][center.y][center.z] = TileType.VACUUM;
+
         // TODO: remove this.  This mines the whole asteroid
-        for (int x = 0; x < region.xSize; x++) {
-            for (int y = 0; y < region.ySize; y++) {
-                for (int z = 0; z < region.zSize; z++) {
+        for (int x = -2; x <= 1; x++) {
+            for (int y = -2; y <= 1; y++) {
+//                for (int z = 0; z < region.zSize; z++) {
 
-                    if (region.tiles[x][y][z].blocks)
-                        jobAssignerSystem.addJob(new DigJob(region, new Point3i(x, y, z)));
+                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
+                    jobAssignerSystem.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
 
-                }
+//                }
             }
         }
+        Spawner.spawnMan(region.world, center.x, center.y, center.z);
 
-        for (int i = 0; i < 10; i++) {
-            Spawner.spawnMan(region.world, i, i, zLevel);
-        }
+//        for (int i = 0; i < 2; i++) {
+//            Spawner.spawnMan(region.world, i, i, zLevel);
+//        }
 
 
         for (int i = 0; i < FurnitureType.values().length; i++) {
