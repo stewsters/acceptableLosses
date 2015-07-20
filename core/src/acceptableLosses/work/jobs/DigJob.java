@@ -1,5 +1,6 @@
 package acceptableLosses.work.jobs;
 
+import acceptableLosses.assets.TileType;
 import acceptableLosses.components.Resume;
 import acceptableLosses.map.Region;
 import com.stewsters.util.math.Point3i;
@@ -65,6 +66,11 @@ public class DigJob implements Job {
     @Override
     public int getAssignee() {
         return assignee;
+    }
+
+    @Override
+    public void accomplishWork() {
+        region.tiles[startPos.x][startPos.y][startPos.z] = TileType.VACUUM;
     }
 
 

@@ -77,21 +77,25 @@ public class GameScreen implements Screen {
         region.world.initialize();
 
 
+        // set up world
+
         Point3i center = new Point3i(region.xSize / 2, region.ySize / 2, region.zSize / 2);
 
-        region.tiles[center.x][center.y][center.z] = TileType.VACUUM;
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                region.tiles[center.x+x][center.y+y][center.z] = TileType.VACUUM;
 
-        // TODO: remove this.  This mines the whole asteroid
-        for (int x = -2; x <= 1; x++) {
-            for (int y = -2; y <= 1; y++) {
-//                for (int z = 0; z < region.zSize; z++) {
-
-                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
-                    jobAssignerSystem.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
-
-//                }
             }
         }
+
+        for (int x = -2; x <= 2; x++) {
+            for (int y = -2; y <= 2; y++) {
+
+                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
+                    region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
+            }
+        }
+
         Spawner.spawnMan(region.world, center.x, center.y, center.z);
 
 //        for (int i = 0; i < 2; i++) {
