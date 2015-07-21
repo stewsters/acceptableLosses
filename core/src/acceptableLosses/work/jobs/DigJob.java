@@ -42,17 +42,6 @@ public class DigJob implements Job {
         return startPos;
     }
 
-//    @Override
-//    public int work() {
-
-//        Tile tile = location.getTile(startPos);
-//        tile.tileType = GameTypes.tileTypes.get("void");
-//        tile.atmosphere = 10; //TODO: fill with air?
-//        //if there are now people standing in the air, drop them
-//
-//        return 50;
-//    }
-
     @Override
     public int getWorkDistance() {
         return 1;

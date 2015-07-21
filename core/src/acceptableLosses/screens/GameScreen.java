@@ -4,6 +4,7 @@ import acceptableLosses.AcceptableLossesGame;
 import acceptableLosses.assets.FurnitureType;
 import acceptableLosses.assets.TileType;
 import acceptableLosses.controls.InputManager;
+import acceptableLosses.controls.commands.TapCommand;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
 import acceptableLosses.map.Spawner;
@@ -83,7 +84,7 @@ public class GameScreen implements Screen {
 
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
-                region.tiles[center.x+x][center.y+y][center.z] = TileType.VACUUM;
+                region.tiles[center.x + x][center.y + y][center.z] = TileType.VACUUM;
 
             }
         }
@@ -118,6 +119,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        //handle commands
+        handleCommands();
+
 
         region.world.setDelta(delta);
         region.world.process();
@@ -155,6 +160,32 @@ public class GameScreen implements Screen {
 
 
         spriteBatch.end();
+    }
+
+    private void handleCommands() {
+        TapCommand command = (TapCommand) inputManager.popCommand();
+        if (command != null) {
+
+            Point3i jobLocation = new Point3i(command.point2i.x, command.point2i.y, zLevel);
+
+            if (region.isOutsideMap(command.point2i.x, command.point2i.y, zLevel)) {
+                Gdx.app.log(this.getClass().getName(), "clicked outside map");
+            } else if (region.getJobAt(command.point2i.x, command.point2i.y, zLevel) == null) {
+
+                region.addJob(new DigJob(region, jobLocation));
+                Gdx.app.log(this.getClass().getName(), "Job added at " + jobLocation.toString());
+            } else {
+                Gdx.app.log(this.getClass().getName(), "Job already marked, removing");
+                //TODO:
+                // get entity from job,
+                // remove job from it
+                // remove job associated pathing
+                // remove job from region map
+
+            }
+
+        }
+
     }
 
     @Override
