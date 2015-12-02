@@ -2,7 +2,6 @@ package acceptableLosses.map;
 
 
 import acceptableLosses.assets.TileType;
-import acceptableLosses.work.jobs.DigJob;
 import acceptableLosses.work.jobs.Job;
 import com.artemis.World;
 import com.stewsters.util.math.Point3i;

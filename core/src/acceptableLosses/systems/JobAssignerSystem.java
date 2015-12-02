@@ -1,20 +1,17 @@
 package acceptableLosses.systems;
 
-import acceptableLosses.components.*;
+import acceptableLosses.components.Position;
+import acceptableLosses.components.Resume;
+import acceptableLosses.components.Sentience;
 import acceptableLosses.map.Region;
-import acceptableLosses.work.CivilianMover;
 import acceptableLosses.work.jobs.Job;
-import acceptableLosses.work.jobs.JobObjective;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
-import com.badlogic.gdx.Gdx;
-import com.stewsters.util.math.Facing3d;
 import com.stewsters.util.math.Point3i;
 import com.stewsters.util.pathing.threeDimention.searcher.DjikstraSearcher3d;
-import com.stewsters.util.pathing.threeDimention.shared.FullPath3d;
 import com.stewsters.util.spatial.IntervalKDTree3d;
 
 import java.util.HashSet;

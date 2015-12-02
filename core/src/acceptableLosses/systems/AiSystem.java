@@ -11,7 +11,7 @@ import com.badlogic.gdx.Gdx;
 
 /**
  * This controls the ai of sentient creatures.
- * <p/>
+ * <p>
  * The primary goal of this class is to assign them things to do,
  * whether it is to walk somewhere, shoot someone, or build something
  */
@@ -39,7 +39,7 @@ public class AiSystem extends EntityProcessingSystem {
     public AiSystem(Region region, JobAssignerSystem jobAssignerSystem) {
         super(Aspect.getAspectForAll(Sentience.class, Position.class));
         this.region = region;
-        this.jobAssignerSystem=jobAssignerSystem;
+        this.jobAssignerSystem = jobAssignerSystem;
     }
 
     @Override

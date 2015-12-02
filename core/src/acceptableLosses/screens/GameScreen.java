@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
         // These should probably be pausable
 
         jobAssignerSystem = region.world.setSystem(new JobAssignerSystem(region), true);
-        aiSystem = region.world.setSystem(new AiSystem(region,jobAssignerSystem), true);
+        aiSystem = region.world.setSystem(new AiSystem(region, jobAssignerSystem), true);
         pathFinderSystem = region.world.setSystem(new PathFinderSystem(region), true);
         movementSystem = region.world.setSystem(new MovementSystem(region), true);
 
