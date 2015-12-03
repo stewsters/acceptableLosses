@@ -6,6 +6,7 @@ import acceptableLosses.assets.FurnitureType;
 import acceptableLosses.components.*;
 import com.artemis.Entity;
 import com.artemis.World;
+import com.badlogic.gdx.Gdx;
 import com.stewsters.util.name.NameGen;
 import com.stewsters.util.types.Gender;
 
@@ -24,10 +25,13 @@ public class Spawner {
         else
             firstName = NameGen.randomFemaleFirstName();
 
-        e.edit().create(Citizen.class).set(firstName, NameGen.randomLastName(), gender);
+        String lastName = NameGen.randomLastName();
+        e.edit().create(Citizen.class).set(firstName, lastName, gender);
         e.edit().create(Health.class).set(10, 10);
         e.edit().create(Appearance.class).set(AssetLoader.atlas.findRegion("character/parts/body/maleBody"));
         e.edit().create(Sentience.class);
+
+        Gdx.app.log("Spawn", firstName + " " + lastName + " has entered the station.");
         return e;
     }
 

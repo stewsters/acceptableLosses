@@ -69,7 +69,6 @@ public class JobAssignerSystem extends EntityProcessingSystem {
             }
 
             if (job != null) {
-                // TODO: Add Task to player containing the job
                 job.setAssignee(e.getId());
                 e.edit().create(Task.class).set(job);
                 e.edit().create(Path.class).set(fullPath3d);

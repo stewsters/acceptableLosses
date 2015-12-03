@@ -20,7 +20,7 @@ public class JobObjective implements Objective3d {
 
     @Override
     public boolean satisfiedBy(PathNode3d current) {
-        //TODO: check to see if there is a job here that we can do.
+        // checks to see if there is a job here that we can do
 
         Job job = region.getJobAt(current.x, current.y, current.z);
         if (job != null && job.satisfiedBy(resume) && job.getAssignee() == 0) {
@@ -35,9 +35,7 @@ public class JobObjective implements Objective3d {
             }
         }
 
-
         return false;
-
 
     }
 }
