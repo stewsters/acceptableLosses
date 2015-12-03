@@ -86,6 +86,9 @@ public class Region implements TileBasedMap3d {
         return (x < 0 || x >= xSize || y < 0 || y >= ySize || z < 0 || z >= zSize);
     }
 
+    public boolean isOutsideMap(Point3i p) {
+        return isOutsideMap(p.x, p.y, p.z);
+    }
 
     public Job getJobAt(int x, int y, int z) {
         if (isOutsideMap(x, y, z))
@@ -97,14 +100,13 @@ public class Region implements TileBasedMap3d {
     public void removeJob(Job job) {
 
         Point3i p = job.getStartPos();
-        if (isOutsideMap(p.x, p.y, p.z))
-            return;
-        else
+        if (!isOutsideMap(p))
             jobs[p.x][p.y][p.z] = null;
     }
 
     public void addJob(Job job) {
         Point3i p = job.getStartPos();
-        jobs[p.x][p.y][p.z] = job;
+        if (!isOutsideMap(p))
+            jobs[p.x][p.y][p.z] = job;
     }
 }

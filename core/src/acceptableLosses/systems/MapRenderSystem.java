@@ -35,10 +35,11 @@ public class MapRenderSystem extends VoidEntitySystem {
 
                 TileType tileType = region.tiles[x][y][gameScreen.zLevel];
 
+                boolean mine = (region.getJobAt(x, y, gameScreen.zLevel) != null);
 
                 if (tileType.texture != null) {
 
-                    spriteBatch.setColor(1, 1, 1, 1);
+                    spriteBatch.setColor(mine ? 0.5f : 1, 1, 1, 1);
                     spriteBatch.draw(tileType.texture, x, y, 1, 1);
 
                 } else if (gameScreen.zLevel - 1 >= 0 && region.tiles[x][y][gameScreen.zLevel - 1].floor != null) {

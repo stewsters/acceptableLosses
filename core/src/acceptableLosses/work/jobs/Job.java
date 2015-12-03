@@ -20,4 +20,6 @@ public interface Job {
     public void setAssignee(int id);
 
     public int getAssignee();
+
+    public void accomplishWork();
 }

@@ -2,7 +2,9 @@ package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
 import acceptableLosses.assets.FurnitureType;
+import acceptableLosses.assets.TileType;
 import acceptableLosses.controls.InputManager;
+import acceptableLosses.controls.commands.TapCommand;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
 import acceptableLosses.map.Spawner;
@@ -76,22 +78,30 @@ public class GameScreen implements Screen {
         region.world.initialize();
 
 
-        // TODO: remove this.  This mines the whole asteroid
-        for (int x = 0; x < region.xSize; x++) {
-            for (int y = 0; y < region.ySize; y++) {
-                for (int z = 0; z < region.zSize; z++) {
+        // set up world
 
-                    if (region.tiles[x][y][z].blocks)
+        Point3i center = new Point3i(region.xSize / 2, region.ySize / 2, region.zSize / 2);
 
-                        region.addJob(new DigJob(region, new Point3i(x, y, z)));
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                region.tiles[center.x + x][center.y + y][center.z] = TileType.VACUUM;
 
-                }
             }
         }
 
-        for (int i = 0; i < 10; i++) {
-            Spawner.spawnMan(region.world, i, i, zLevel);
+        for (int x = -2; x <= 2; x++) {
+            for (int y = -2; y <= 2; y++) {
+
+                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
+                    region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
+            }
         }
+
+        Spawner.spawnMan(region.world, center.x, center.y, center.z);
+
+//        for (int i = 0; i < 2; i++) {
+//            Spawner.spawnMan(region.world, i, i, zLevel);
+//        }
 
 
         for (int i = 0; i < FurnitureType.values().length; i++) {
@@ -109,6 +119,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        //handle commands
+        handleCommands();
+
 
         region.world.setDelta(delta);
         region.world.process();
@@ -146,6 +160,32 @@ public class GameScreen implements Screen {
 
 
         spriteBatch.end();
+    }
+
+    private void handleCommands() {
+        TapCommand command = (TapCommand) inputManager.popCommand();
+        if (command != null) {
+
+            Point3i jobLocation = new Point3i(command.point2i.x, command.point2i.y, zLevel);
+
+            if (region.isOutsideMap(command.point2i.x, command.point2i.y, zLevel)) {
+                Gdx.app.log(this.getClass().getName(), "clicked outside map");
+            } else if (region.getJobAt(command.point2i.x, command.point2i.y, zLevel) == null) {
+
+                region.addJob(new DigJob(region, jobLocation));
+                Gdx.app.log(this.getClass().getName(), "Job added at " + jobLocation.toString());
+            } else {
+                Gdx.app.log(this.getClass().getName(), "Job already marked, removing");
+                //TODO:
+                // get entity from job,
+                // remove job from it
+                // remove job associated pathing
+                // remove job from region map
+
+            }
+
+        }
+
     }
 
     @Override

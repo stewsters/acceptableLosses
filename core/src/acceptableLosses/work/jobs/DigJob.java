@@ -1,5 +1,6 @@
 package acceptableLosses.work.jobs;
 
+import acceptableLosses.assets.TileType;
 import acceptableLosses.components.Resume;
 import acceptableLosses.map.Region;
 import com.stewsters.util.math.Point3i;
@@ -19,24 +20,27 @@ public class DigJob implements Job {
 
     @Override
     public boolean satisfiedBy(Resume resume) {
-        return resume.canDig;
+
+        if (!resume.canDig) {
+            //dont dig
+            return false;
+        }
+
+        for (Point3i pos : startPos.mooreNeighborhood3D()) {
+
+            if (!region.isBlocked(resume.mover3d, pos.x, pos.y, pos.z)) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
     @Override
     public Point3i getStartPos() {
         return startPos;
     }
-
-//    @Override
-//    public int work() {
-
-//        Tile tile = location.getTile(startPos);
-//        tile.tileType = GameTypes.tileTypes.get("void");
-//        tile.atmosphere = 10; //TODO: fill with air?
-//        //if there are now people standing in the air, drop them
-//
-//        return 50;
-//    }
 
     @Override
     public int getWorkDistance() {
@@ -51,6 +55,11 @@ public class DigJob implements Job {
     @Override
     public int getAssignee() {
         return assignee;
+    }
+
+    @Override
+    public void accomplishWork() {
+        region.tiles[startPos.x][startPos.y][startPos.z] = TileType.VACUUM;
     }
 
 
