@@ -71,7 +71,8 @@ public class AiSystem extends EntityProcessingSystem {
 
                 if (distanceToTask <= task.job.getWorkDistance()) {
                     // if we are close enough, do the task
-                    jobAssignerSystem.remove(task.job);
+
+                    region.removeJob(task.job);
                     e.edit().remove(Task.class);
 
                 } else if (task != null) {

@@ -82,7 +82,8 @@ public class GameScreen implements Screen {
                 for (int z = 0; z < region.zSize; z++) {
 
                     if (region.tiles[x][y][z].blocks)
-                        jobAssignerSystem.addJob(new DigJob(region, new Point3i(x, y, z)));
+
+                        region.addJob(new DigJob(region, new Point3i(x, y, z)));
 
                 }
             }

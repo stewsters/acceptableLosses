@@ -21,8 +21,8 @@ import java.util.HashSet;
  */
 public class JobAssignerSystem extends EntityProcessingSystem {
 
-    IntervalKDTree3d jobs;
-    private HashSet<Job> jobTemp;
+//    IntervalKDTree3d jobs;
+//    private HashSet<Job> jobTemp;
 
     private final Region region;
     private final DjikstraSearcher3d searcher;
@@ -37,34 +37,6 @@ public class JobAssignerSystem extends EntityProcessingSystem {
         searcher = new DjikstraSearcher3d(region, 10000, false);
         this.region = region;
 
-        //optimize this
-        int size = Math.max(Math.max(region.xSize, region.ySize), region.zSize);
-
-        jobs = new IntervalKDTree3d((size / 2) + 1, 10);
-    }
-
-    //add
-    public void addJob(Job job) {
-        float radius = job.getWorkDistance() / 2f;
-        Point3i e = job.getStartPos();
-        jobs.put(e.x - radius, e.y - radius, e.z - radius, e.x + radius, e.y + radius, e.z + radius, e);
-    }
-
-    //remove
-
-    public void remove(Job e) {
-        jobs.remove(e);
-    }
-
-
-    public HashSet<Entity> getEntitiesAtLocation(int x, int y, int z) {
-        jobTemp.clear();
-        return jobs.getValues(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5, jobTemp);
-    }
-
-    public HashSet<Entity> getEntitiesBetween(int lowX, int lowY, int lowZ, int highX, int highY, int highZ) {
-        jobTemp.clear();
-        return jobs.getValues(lowX - 0.5, lowY - 0.5, lowZ - 0.5, highX + 0.5, highY + 0.5, highZ + 0.5, jobTemp);
     }
 
     @Override
