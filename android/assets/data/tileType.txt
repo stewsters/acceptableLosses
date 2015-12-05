@@ -1,0 +1,24 @@
+# [id]
+# name:NAME
+# blocks:true
+# texture:nameOfTexture
+
+[VACUUM]
+name:Vacuum
+blocks:false
+
+[SILICON_ORE]
+name:Silicon Ore
+texture:silicon
+
+[CARBON_ORE]
+name:Carbon Ore
+texture:carbon
+
+[METAL_ORE]
+name:Metal Ore
+texture:metal
+
+[WATER_ICE]
+name:Ice
+texture:ice

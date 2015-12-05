@@ -82,10 +82,10 @@ public class GameScreen implements Screen {
 
         Point3i center = new Point3i(region.xSize / 2, region.ySize / 2, region.zSize / 2);
 
+        TileType vacuum = TileType.types.get("VACUUM");
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
-                region.tiles[center.x + x][center.y + y][center.z] = TileType.VACUUM;
-
+                region.tiles[center.x + x][center.y + y][center.z] = vacuum;
             }
         }
 

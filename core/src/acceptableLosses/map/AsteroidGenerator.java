@@ -18,6 +18,9 @@ public class AsteroidGenerator {
 
     public static Region generateGeneralAsteroid(Region region, Point3i center, int radius, float radiusRange, float edgeRandomness, float oreClumpRandomness) {
 
+        TileType carbon = TileType.types.get("CARBON_ORE");
+        TileType silicon = TileType.types.get("SILICON_ORE");
+
         OpenSimplexNoise openSimplexNoise = new OpenSimplexNoise();
         OpenSimplexNoise alternateOpenSimplexNoise = new OpenSimplexNoise();
         for (int x = 0; x < region.xSize; x++) {
@@ -32,8 +35,8 @@ public class AsteroidGenerator {
 
                     if (randomRadius * randomRadius > distSquared) {
                         region.tiles[x][y][z] = (alternateOpenSimplexNoise.eval(x / oreClumpRandomness, y / oreClumpRandomness, z / oreClumpRandomness) >= 0)
-                                ? TileType.CARBON_ORE
-                                : TileType.SILICON_ORE;
+                                ? carbon
+                                : silicon;
                     }
 
                 }

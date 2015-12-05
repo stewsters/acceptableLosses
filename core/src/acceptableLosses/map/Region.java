@@ -30,10 +30,11 @@ public class Region implements TileBasedMap3d {
         furniture = new Furniture[xSize][ySize][zSize];
         jobs = new Job[xSize][ySize][zSize];
 
+        TileType vacuum = TileType.types.get("VACUUM");
         for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
                 for (int z = 0; z < zSize; z++) {
-                    tiles[x][y][z] = TileType.VACUUM;
+                    tiles[x][y][z] = vacuum;
 
                 }
             }

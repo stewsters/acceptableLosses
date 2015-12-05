@@ -59,7 +59,7 @@ public class DigJob implements Job {
 
     @Override
     public void accomplishWork() {
-        region.tiles[startPos.x][startPos.y][startPos.z] = TileType.VACUUM;
+        region.tiles[startPos.x][startPos.y][startPos.z] = TileType.types.get("VACUUM");
     }
 
 

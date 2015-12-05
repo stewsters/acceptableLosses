@@ -3,27 +3,17 @@ package acceptableLosses.assets;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public enum TileType {
+import java.util.LinkedHashMap;
 
-    VACUUM("Vacuum", null, false),
-    SILICON_ORE("Silicon Ore", "silicon", true),
-    CARBON_ORE("Carbon Ore", "carbon", true),
-    METAL_ORE("Metal Ore", "metal", true),
-    ICE("Ice", "ice", true);
+public class TileType {
 
-    public final String name;
-    public final String textureName;
-    public final boolean blocks;
+    public static LinkedHashMap<String, TileType> types;
+
+    public String id;
+    public String name;
+    public boolean blocks = true;
 
     public TextureRegion texture;
     public TextureRegion floor;
-
-
-    TileType(String name, String textureName, boolean blocksMovement) {
-        this.name = name;
-        this.textureName = textureName;
-        this.blocks = blocksMovement;
-    }
-
 
 }
