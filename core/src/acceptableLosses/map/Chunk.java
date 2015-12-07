@@ -13,7 +13,7 @@ public class Chunk {
 
     public TileType[][][] tiles;
 
-    private final Furniture[][][] furniture;
+    private final Building[][][] building;
     private final Job[][][] jobs;
 
     public Chunk(int lowCornerX, int lowCornerY, int lowCornerZ, TileType[][][] data) {
@@ -21,7 +21,7 @@ public class Chunk {
         this.lowCornerY = lowCornerY;
         this.lowCornerZ = lowCornerZ;
         this.tiles = data;
-        furniture = new Furniture[chunkSize][chunkSize][chunkSize];
+        building = new Building[chunkSize][chunkSize][chunkSize];
         jobs = new Job[chunkSize][chunkSize][chunkSize];
 
 

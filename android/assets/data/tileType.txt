@@ -1,24 +1,27 @@
 # [id]
 # name:NAME
-# blocks:true
 # texture:nameOfTexture
+# blocks
 
 [VACUUM]
 name:Vacuum
-blocks:false
 
 [SILICON_ORE]
 name:Silicon Ore
 texture:silicon
+blocks
 
 [CARBON_ORE]
 name:Carbon Ore
 texture:carbon
+blocks
 
 [METAL_ORE]
 name:Metal Ore
 texture:metal
+blocks
 
 [WATER_ICE]
 name:Ice
 texture:ice
+blocks

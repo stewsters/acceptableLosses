@@ -12,7 +12,7 @@ import com.stewsters.util.pathing.threeDimention.shared.TileBasedMap3d;
 public class Region implements TileBasedMap3d {
 
     public final TileType[][][] tiles;
-    public final Furniture[][][] furniture;
+    public final Building[][][] building;
     public final Job[][][] jobs;
 
     public final int xSize;
@@ -27,7 +27,7 @@ public class Region implements TileBasedMap3d {
         this.zSize = zSize;
 
         tiles = new TileType[xSize][ySize][zSize];
-        furniture = new Furniture[xSize][ySize][zSize];
+        building = new Building[xSize][ySize][zSize];
         jobs = new Job[xSize][ySize][zSize];
 
         TileType vacuum = TileType.types.get("VACUUM");
@@ -74,7 +74,7 @@ public class Region implements TileBasedMap3d {
 
     @Override
     public boolean isBlocked(Mover3d mover, int x, int y, int z) {
-        return tiles[x][y][z].blocks || (furniture[x][y][z] != null && furniture[x][y][z].furnitureType.blocks);
+        return tiles[x][y][z].blocks || (building[x][y][z] != null && building[x][y][z].buildingType.blocks);
     }
 
     @Override

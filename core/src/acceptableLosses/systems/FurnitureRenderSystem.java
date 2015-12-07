@@ -1,6 +1,6 @@
 package acceptableLosses.systems;
 
-import acceptableLosses.map.Furniture;
+import acceptableLosses.map.Building;
 import acceptableLosses.map.Region;
 import acceptableLosses.screens.GameScreen;
 import com.artemis.systems.VoidEntitySystem;
@@ -30,10 +30,10 @@ public class FurnitureRenderSystem extends VoidEntitySystem {
         for (int x = 0; x < region.xSize; x++) {
             for (int y = 0; y < region.ySize; y++) {
 
-                Furniture furniture = region.furniture[x][y][gameScreen.zLevel];
-                if (furniture != null && furniture.furnitureType != null && furniture.furnitureType.texture != null) {
+                Building building = region.building[x][y][gameScreen.zLevel];
+                if (building != null && building.buildingType != null && building.buildingType.texture != null) {
 
-                    spriteBatch.draw(furniture.furnitureType.texture, x, y, 1, 1);
+                    spriteBatch.draw(building.buildingType.texture, x, y, 1, 1);
                 }
 
             }

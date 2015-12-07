@@ -1,14 +1,21 @@
 package acceptableLosses.screens;
 
 import acceptableLosses.AcceptableLossesGame;
-import acceptableLosses.assets.FurnitureType;
+import acceptableLosses.assets.BuildingType;
 import acceptableLosses.assets.TileType;
 import acceptableLosses.controls.InputManager;
 import acceptableLosses.controls.commands.TapCommand;
 import acceptableLosses.map.AsteroidGenerator;
 import acceptableLosses.map.Region;
 import acceptableLosses.map.Spawner;
-import acceptableLosses.systems.*;
+import acceptableLosses.systems.AiSystem;
+import acceptableLosses.systems.AppearanceRenderSystem;
+import acceptableLosses.systems.ElevationSystem;
+import acceptableLosses.systems.FurnitureRenderSystem;
+import acceptableLosses.systems.JobAssignerSystem;
+import acceptableLosses.systems.MapRenderSystem;
+import acceptableLosses.systems.MovementSystem;
+import acceptableLosses.systems.PathFinderSystem;
 import acceptableLosses.work.jobs.DigJob;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -103,12 +110,11 @@ public class GameScreen implements Screen {
 //            Spawner.spawnMan(region.world, i, i, zLevel);
 //        }
 
-
-        for (int i = 0; i < FurnitureType.values().length; i++) {
-
-            Spawner.spawnFurniture(region, 5, i + 2, zLevel, FurnitureType.values()[i]);
+        int i = 0;
+        for (BuildingType buildingType : BuildingType.types.values()) {
+            Spawner.spawnFurniture(region, 5, i + 2, zLevel, buildingType);
+            i++;
         }
-
 
         inputManager = new InputManager(camera);
 

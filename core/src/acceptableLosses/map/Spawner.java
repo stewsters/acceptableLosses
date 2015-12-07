@@ -2,7 +2,7 @@ package acceptableLosses.map;
 
 
 import acceptableLosses.assets.AssetLoader;
-import acceptableLosses.assets.FurnitureType;
+import acceptableLosses.assets.BuildingType;
 import acceptableLosses.components.*;
 import com.artemis.Entity;
 import com.artemis.World;
@@ -36,16 +36,16 @@ public class Spawner {
     }
 
 
-    public static boolean spawnFurniture(Region region, int x, int y, int z, FurnitureType furnitureType) {
+    public static boolean spawnFurniture(Region region, int x, int y, int z, BuildingType buildingType) {
 
         if (region.isOutsideMap(x, y, z))
             return false;
         if (region.tiles[x][y][z].blocks)
             return false;
-        else if (region.furniture[x][y][z] != null)
+        else if (region.building[x][y][z] != null)
             return false;
 
-        region.furniture[x][y][z] = new Furniture(furnitureType);
+        region.building[x][y][z] = new Building(buildingType);
         return true;
 
     }

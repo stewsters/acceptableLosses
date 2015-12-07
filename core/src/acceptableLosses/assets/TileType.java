@@ -11,7 +11,7 @@ public class TileType {
 
     public String id;
     public String name;
-    public boolean blocks = true;
+    public boolean blocks = false;
 
     public TextureRegion texture;
     public TextureRegion floor;

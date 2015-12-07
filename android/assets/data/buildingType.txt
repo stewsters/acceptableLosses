@@ -1,0 +1,71 @@
+# [id]
+# name:Name
+# texture:textureName
+# blocks    (Blocks movement, currently also airtight but we may want to change that for vent grates)
+# airtight  (Blocks air)
+# climbable (can climb up or down here)
+
+[AI_CORE]
+name:ai core
+texture:aiCore
+blocks
+
+[AIRLOCK]
+name:airlock
+texture:airlock
+airtight
+
+[BED]
+name:bed
+texture:bed
+
+[BLAST_DOOR_CLOSED]
+name:blast door closed
+texture:blastDoorClosed
+blocks
+
+
+[BLAST_DOOR_OPEN]
+name:blast door opened
+texture:blastDoorOpen
+
+
+[CRYOSTATIS_POD]
+name:cryostasis pod
+texture:cryostatisPod
+blocks
+
+[HATCH]
+name:hatch
+texture:hatch
+
+
+[KITCHEN]
+name:kitchen
+texture:kitchen
+blocks
+
+[LADDER]
+name:ladder
+texture:ladder
+
+
+[LIFE_SUPPORT]
+name:life support
+texture:lifeSupport
+blocks
+
+[PORTAL]
+name:portal
+texture:portal
+
+
+[PROCESSING_CORE]
+name:processing core
+texture:processingCore
+blocks
+
+[REACTOR]
+name:reactor
+texture:reactor
+blocks

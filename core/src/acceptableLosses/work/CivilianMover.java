@@ -25,8 +25,8 @@ public class CivilianMover implements Mover3d {
         }
 
         //Furniture
-        if (region.furniture[pathNode.x][pathNode.y][pathNode.z] != null &&
-                region.furniture[pathNode.x][pathNode.y][pathNode.z].furnitureType.blocks)
+        if (region.building[pathNode.x][pathNode.y][pathNode.z] != null &&
+                region.building[pathNode.x][pathNode.y][pathNode.z].buildingType.blocks)
             return false;
 
         return true;
