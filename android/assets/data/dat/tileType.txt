@@ -3,6 +3,7 @@
 # texture:nameOfTexture
 # blocks
 
+# I would like to use VOID for this, but reserved keywords and all
 [VACUUM]
 name:Vacuum
 

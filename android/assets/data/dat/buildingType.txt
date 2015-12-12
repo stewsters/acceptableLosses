@@ -2,6 +2,7 @@
 # name:Name
 # texture:textureName
 # blocks    (Blocks movement, currently also airtight but we may want to change that for vent grates)
+# slow:8	(Slows movement over this tile)
 # airtight  (Blocks air)
 # climbable (can climb up or down here)
 
@@ -14,10 +15,12 @@ blocks
 name:airlock
 texture:airlock
 airtight
+slow:4
 
 [BED]
 name:bed
 texture:bed
+slow:4
 
 [BLAST_DOOR_CLOSED]
 name:blast door closed
@@ -48,7 +51,7 @@ blocks
 [LADDER]
 name:ladder
 texture:ladder
-
+climbable
 
 [LIFE_SUPPORT]
 name:life support
@@ -69,3 +72,9 @@ blocks
 name:reactor
 texture:reactor
 blocks
+
+
+#[SMELTER]
+#[FABRICATOR]
+#[ARMORY]
+

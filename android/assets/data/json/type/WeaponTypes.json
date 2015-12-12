@@ -1,0 +1,28 @@
+[
+    {
+        "name": "torch",
+        "type": "primary",
+        "meleeDamage":1,
+        "rangedDamage":0,
+        "color":{"r":100,"g":100,"b":255},
+        "texture":"character/parts/weapon/torch",
+        "flags":["IGNITE"]
+    },
+    {
+        "name": "sword",
+        "type": "primary",
+        "meleeDamage":3,
+        "rangedDamage":0,
+        "color":{"r":255,"g":255,"b":255},
+        "texture":"character/parts/weapon/sword"
+    },
+    {
+        "name": "rifle",
+        "type": "primary",
+        "meleeDamage":1,
+        "rangedDamage":2,
+        "color":{"r":255,"g":255,"b":255},
+        "texture":"character/parts/weapon/rifle",
+        "range":10
+    }
+]

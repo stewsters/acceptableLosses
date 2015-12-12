@@ -1,0 +1,31 @@
+[
+    {
+        "name": "casual",
+        "armor": 0,
+        "speed": 0,
+        "color":{"r":255,"g":255,"b":255},
+        "texture":"character/parts/garment/dress"
+    },
+    {
+        "name": "suit",
+        "armor": 0,
+        "speed": 0,
+        "color":{"r":255,"g":255,"b":255},
+        "texture":"character/parts/garment/uniform"
+    },
+    {
+        "name": "jetpack",
+        "armor": 0,
+        "speed": 0,
+        "fly":false,
+        "color":{"r":255,"g":255,"b":255},
+        "texture":"character/parts/garment/uniform"
+    },
+    {
+        "name": "assault armor",
+        "armor": 6,
+        "speed": -2,
+        "color":{"r":100,"g":255,"b":100},
+        "texture":"character/parts/garment/assaultArmor"
+    }
+]
