@@ -3,7 +3,10 @@ package acceptableLosses.assets.body;
 import com.badlogic.gdx.graphics.Color;
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+
 public class SkinColor {
+    public static HashMap<String, SkinColor> types;
     public String name;
     public Color color;
 

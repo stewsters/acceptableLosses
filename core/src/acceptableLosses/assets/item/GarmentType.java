@@ -1,14 +1,19 @@
 package acceptableLosses.assets.item;
 
 
+
+import acceptableLosses.assets.AssetLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.stewsters.colony.game.graphics.GameTypes;
 import org.json.simple.JSONObject;
+
+import java.util.HashMap;
 
 public class GarmentType {
 
+    public static HashMap<String, GarmentType> types;
+            ;
     public final String name;
     public final TextureRegion texture;
     public final Color color;
@@ -27,7 +32,7 @@ public class GarmentType {
         } else {
             canFly = false;
         }
-        color = GameTypes.getColor((JSONObject) garmentType.get("color"));
+        color = AssetLoader.getColor((JSONObject) garmentType.get("color"));
         texture = textureAtlas.findRegion((String) garmentType.get("texture"));
 
     }

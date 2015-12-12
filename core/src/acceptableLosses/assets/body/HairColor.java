@@ -3,7 +3,12 @@ package acceptableLosses.assets.body;
 import com.badlogic.gdx.graphics.Color;
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+
 public class HairColor {
+
+    public static HashMap<String, HairColor> types;
+
     public String name;
     public Color color;
 

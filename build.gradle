@@ -72,6 +72,9 @@ project(":core") {
         compile "net.onedaybeard.artemis:artemis-odb:0.8.1"
         compile "com.stewsters.util:stewsters-util:0.11"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        compile 'com.googlecode.json-simple:json-simple:1.1.1'
+
+
     }
 }
 

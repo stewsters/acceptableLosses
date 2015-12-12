@@ -1,0 +1,7 @@
+[MALE]
+name:male
+texture:maleBody
+
+[FEMALE]
+name:female
+texture:femaleBody

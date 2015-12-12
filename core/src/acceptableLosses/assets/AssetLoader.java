@@ -1,10 +1,20 @@
 package acceptableLosses.assets;
 
 
+import acceptableLosses.assets.body.BodyShape;
 import acceptableLosses.assets.body.HairColor;
+import acceptableLosses.assets.body.HairStyle;
 import acceptableLosses.assets.body.SkinColor;
+import acceptableLosses.assets.item.GarmentType;
+import acceptableLosses.assets.item.HatType;
+import acceptableLosses.assets.item.weapon.WeaponType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -29,14 +39,14 @@ public class AssetLoader {
         initTileTypes();
         initBuildingTypes();
     }
+
     public static void dispose() {
         atlas.dispose();
     }
 
 
-
     private static void initHairColor() {
-        hairColor = new HashMap<String, HairColor>();
+        HairColor.types = new HashMap<String, HairColor>();
         FileHandle handle = Gdx.files.internal("data/json/HairColor.json");
         String text = handle.readString();
 
@@ -48,7 +58,7 @@ public class AssetLoader {
 
                 JSONObject hairObj = (JSONObject) object;
                 HairColor hairColorInstance = new HairColor(hairObj);
-                hairColor.put(hairColorInstance.name, hairColorInstance);
+                HairColor.types.put(hairColorInstance.name, hairColorInstance);
             }
 
 
@@ -58,7 +68,7 @@ public class AssetLoader {
     }
 
     private static void initSkinColor() {
-        skinColor = new HashMap<String, SkinColor>();
+        SkinColor.types = new HashMap<String, SkinColor>();
         FileHandle handle = Gdx.files.internal("data/json/Complexion.json");
         String text = handle.readString();
 
@@ -70,7 +80,7 @@ public class AssetLoader {
 
                 JSONObject skinObj = (JSONObject) object;
                 SkinColor skin = new SkinColor(skinObj);
-                skinColor.put(skin.name, skin);
+                SkinColor.types.put(skin.name, skin);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,7 +89,7 @@ public class AssetLoader {
 
 
     private static void initHats(TextureAtlas atlas) {
-        hatTypes = new HashMap<String, HatType>();
+        HatType.types = new HashMap<String, HatType>();
 
         FileHandle handle = Gdx.files.internal("data/json/type/HatTypes.json");
         String text = handle.readString();
@@ -89,7 +99,7 @@ public class AssetLoader {
             JSONArray array = (JSONArray) parser.parse(text);
             for (Object object : array) {
                 HatType hatType = new HatType((JSONObject) object, atlas);
-                hatTypes.put(hatType.name, hatType);
+                HatType.types.put(hatType.name, hatType);
                 System.out.println(hatType.name);
             }
 
@@ -100,20 +110,32 @@ public class AssetLoader {
     }
 
     private static void initHair(TextureAtlas atlas) {
+        HairStyle.types = new HashMap<String, HairStyle>();
 
-        hairTextures = new HashMap<String, TextureRegion>();
-        hairTextures.put("longHair", atlas.findRegion("character/parts/hair/longHair"));
-        hairTextures.put("shortHair", atlas.findRegion("character/parts/hair/shortHair"));
+        //TODO: import from file
+        HairStyle hairStyle = new HairStyle();
+        hairStyle.id = "LONG_HAIR";
+        hairStyle.name = "long hair";
+        hairStyle.texture = atlas.findRegion("character/parts/hair/longHair");
+
+        HairStyle.types.put(hairStyle.id, hairStyle);
+
     }
 
     private static void initBodies(TextureAtlas atlas) {
-        bodyTextures = new HashMap<String, TextureRegion>();
-        bodyTextures.put("maleBody", atlas.findRegion("character/parts/body/maleBody"));
-        bodyTextures.put("femaleBody", atlas.findRegion("character/parts/body/femaleBody"));
+        BodyShape.types = new HashMap<String, BodyShape>();
+
+        //TODO: import from file
+
+        BodyShape bodyShape = new BodyShape();
+        bodyShape.id = "MALE";
+        bodyShape.name = "male";
+        bodyShape.texture = atlas.findRegion("character/parts/body/maleBody");
+
     }
 
     private static void initGarments(TextureAtlas atlas) {
-        garmentTypes = new HashMap<String, GarmentType>();
+        GarmentType.types = new HashMap<String, GarmentType>();
         FileHandle handle = Gdx.files.internal("data/json/type/GarmentTypes.json");
         String text = handle.readString();
 
@@ -122,7 +144,7 @@ public class AssetLoader {
             JSONArray array = (JSONArray) parser.parse(text);
             for (Object object : array) {
                 GarmentType garmentType = new GarmentType((JSONObject) object, atlas);
-                garmentTypes.put(garmentType.name, garmentType);
+                GarmentType.types.put(garmentType.name, garmentType);
             }
 
         } catch (Exception e) {
@@ -133,7 +155,7 @@ public class AssetLoader {
 
     private static void initWeapons(TextureAtlas atlas) {
 
-        weaponTypes = new HashMap<String, WeaponType>();
+        WeaponType.types = new HashMap<String, WeaponType>();
         FileHandle handle = Gdx.files.internal("data/json/type/WeaponTypes.json");
         String text = handle.readString();
 
@@ -142,7 +164,7 @@ public class AssetLoader {
             JSONArray array = (JSONArray) parser.parse(text);
             for (Object object : array) {
                 WeaponType weaponType = new WeaponType((JSONObject) object, atlas);
-                weaponTypes.put(weaponType.name, weaponType);
+                WeaponType.types.put(weaponType.name, weaponType);
             }
 
         } catch (Exception e) {
@@ -154,7 +176,7 @@ public class AssetLoader {
         TileType.types = new LinkedHashMap<String, TileType>();
 
         TileType tileType = null;
-        for (String line : Gdx.files.internal("data/tileType.txt").readString().split("\\n")) {
+        for (String line : Gdx.files.internal("data/dat/tileType.txt").readString().split("\\n")) {
             String trimmed = line.trim();
 
             if (trimmed.startsWith("#") || trimmed.length() == 0) {
@@ -194,7 +216,7 @@ public class AssetLoader {
         BuildingType.types = new LinkedHashMap<String, BuildingType>();
 
         BuildingType buildingType = null;
-        for (String line : Gdx.files.internal("data/buildingType.txt").readString().split("\\n")) {
+        for (String line : Gdx.files.internal("data/dat/buildingType.txt").readString().split("\\n")) {
             String trimmed = line.trim();
 
             if (trimmed.startsWith("#") || trimmed.length() == 0) {
@@ -234,7 +256,22 @@ public class AssetLoader {
     }
 
 
+    public static Color getColor(JSONObject weaponColor) {
+        if (weaponColor == null)
+            return Color.WHITE;
 
+        float r = (float) ((Long) weaponColor.get("r")).longValue();
+        float g = (float) ((Long) weaponColor.get("g")).longValue();
+        float b = (float) ((Long) weaponColor.get("b")).longValue();
+
+        System.out.println(r + " " + g + " " + b);
+
+        return new Color(
+                r / 255f,
+                g / 255f,
+                b / 255f,
+                1);
+    }
 
 
 }

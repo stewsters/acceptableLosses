@@ -1,12 +1,12 @@
 package acceptableLosses.assets.item;
 
 
+import acceptableLosses.assets.item.weapon.WeaponType;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.stewsters.colony.game.entity.stats.Entity;
-import com.stewsters.colony.game.entity.stats.item.weapon.WeaponType;
+
 
 public class Item {
-    public Entity owner;
+
     public TextureRegion texture;
     public Comestible comestible;//TODO: move inside item
 

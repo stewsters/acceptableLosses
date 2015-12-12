@@ -1,14 +1,16 @@
 package acceptableLosses.assets.item.weapon;
 
+import acceptableLosses.assets.AssetLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.stewsters.colony.game.entity.anima.FlameAnima;
-import com.stewsters.colony.game.entity.stats.Entity;
-import com.stewsters.colony.game.graphics.GameTypes;
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+
 public class WeaponType {
+
+    public static HashMap<String, WeaponType> types;
 
     public final WeaponSlot weaponSlot;
     public final String name;
@@ -21,15 +23,13 @@ public class WeaponType {
 
 
     //TODO: add attachments? or is that a character thing
-
-
-    public void attack(Entity target) {
-
-        if (target.soldier != null) {
-            target.soldier.injure(rangedDamage);
-            FlameAnima.spawnFlame(target.location, target.pos.x, target.pos.y, target.pos.z);
-        }
-    }
+//    public void attack(Entity target) {
+//
+//        if (target.soldier != null) {
+//            target.soldier.injure(rangedDamage);
+//            FlameAnima.spawnFlame(target.location, target.pos.x, target.pos.y, target.pos.z);
+//        }
+//    }
 
     public WeaponType(JSONObject weapon, TextureAtlas textureAtlas) {
         name = (String) weapon.get("name");
@@ -43,7 +43,7 @@ public class WeaponType {
         else
             range = 1;
 
-        color = GameTypes.getColor((JSONObject) weapon.get("color"));
+        color = AssetLoader.getColor((JSONObject) weapon.get("color"));
         texture = textureAtlas.findRegion((String) weapon.get("texture"));
 
     }

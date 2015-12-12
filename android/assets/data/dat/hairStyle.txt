@@ -1,0 +1,11 @@
+[BALD]
+name:bald
+
+
+[SHORT_HAIR]
+name:short hair
+texture:shortHair
+
+[LONG_HAIR]
+name:long hair
+texture:longHair
