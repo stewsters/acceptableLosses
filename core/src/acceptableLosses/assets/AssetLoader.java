@@ -112,25 +112,73 @@ public class AssetLoader {
     private static void initHair(TextureAtlas atlas) {
         HairStyle.types = new HashMap<String, HairStyle>();
 
-        //TODO: import from file
-        HairStyle hairStyle = new HairStyle();
-        hairStyle.id = "LONG_HAIR";
-        hairStyle.name = "long hair";
-        hairStyle.texture = atlas.findRegion("character/parts/hair/longHair");
+        HairStyle hairStyle = null;
+        for (String line : Gdx.files.internal("data/dat/hairStyle.txt").readString().split("\\n")) {
+            String trimmed = line.trim();
 
+            if (trimmed.startsWith("#") || trimmed.length() == 0) {
+                continue;
+            }
+
+            if (trimmed.startsWith("[")) {
+                //Then we have an id
+                if (hairStyle != null) {
+                    //New one, save the old
+                    HairStyle.types.put(hairStyle.id, hairStyle);
+                }
+                hairStyle = new HairStyle();
+                hairStyle.id = trimmed.substring(1, trimmed.length() - 1);
+
+            } else if (hairStyle == null) {
+                Gdx.app.log("LOADING", "Bad ordering");
+                break;
+
+            } else if (trimmed.startsWith("name:")) {
+                //Then we have an id
+                hairStyle.name = trimmed.split(":")[1];
+
+            } else if (trimmed.startsWith("texture:")) {
+                hairStyle.texture = atlas.findRegion("character/parts/hair/" + trimmed.split(":")[1]);
+
+            }
+        }
         HairStyle.types.put(hairStyle.id, hairStyle);
-
     }
 
     private static void initBodies(TextureAtlas atlas) {
         BodyShape.types = new HashMap<String, BodyShape>();
 
-        //TODO: import from file
+        BodyShape bodyShape = null;
+        for (String line : Gdx.files.internal("data/dat/bodyType.txt").readString().split("\\n")) {
+            String trimmed = line.trim();
 
-        BodyShape bodyShape = new BodyShape();
-        bodyShape.id = "MALE";
-        bodyShape.name = "male";
-        bodyShape.texture = atlas.findRegion("character/parts/body/maleBody");
+            if (trimmed.startsWith("#") || trimmed.length() == 0) {
+                continue;
+            }
+
+            if (trimmed.startsWith("[")) {
+                //Then we have an id
+                if (bodyShape != null) {
+                    //New one, save the old
+                    BodyShape.types.put(bodyShape.id, bodyShape);
+                }
+                bodyShape = new BodyShape();
+                bodyShape.id = trimmed.substring(1, trimmed.length() - 1);
+
+            } else if (bodyShape == null) {
+                Gdx.app.log("LOADING", "Bad ordering");
+                break;
+
+            } else if (trimmed.startsWith("name:")) {
+                //Then we have an id
+                bodyShape.name = trimmed.split(":")[1];
+
+            } else if (trimmed.startsWith("texture:")) {
+                bodyShape.texture = atlas.findRegion("character/parts/body/" + trimmed.split(":")[1]);
+
+            }
+        }
+        BodyShape.types.put(bodyShape.id, bodyShape);
 
     }
 

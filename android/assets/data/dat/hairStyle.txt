@@ -1,7 +1,6 @@
 [BALD]
 name:bald
 
-
 [SHORT_HAIR]
 name:short hair
 texture:shortHair

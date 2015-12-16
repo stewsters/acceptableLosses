@@ -10,6 +10,7 @@ import acceptableLosses.map.Region;
 import acceptableLosses.map.Spawner;
 import acceptableLosses.systems.AiSystem;
 import acceptableLosses.systems.AppearanceRenderSystem;
+import acceptableLosses.systems.CitizenRenderSystem;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.FurnitureRenderSystem;
 import acceptableLosses.systems.JobAssignerSystem;
@@ -43,6 +44,7 @@ public class GameScreen implements Screen {
     private MapRenderSystem mapRenderSystem;
 
     private AppearanceRenderSystem appearanceRenderSystem;
+    private CitizenRenderSystem citizenRenderSystem;
 
     private AiSystem aiSystem;
     private JobAssignerSystem jobAssignerSystem;
@@ -74,7 +76,7 @@ public class GameScreen implements Screen {
         furnitureRenderSystem = new FurnitureRenderSystem(this, spriteBatch, region);
 
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
-
+        citizenRenderSystem = region.world.setSystem(new CitizenRenderSystem(this, spriteBatch), true);
         // These should probably be pausable
 
         jobAssignerSystem = region.world.setSystem(new JobAssignerSystem(region), true);
@@ -104,8 +106,11 @@ public class GameScreen implements Screen {
             }
         }
 
-        Spawner.spawnMan(region.world, center.x, center.y, center.z);
-
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                Spawner.spawnMan(region.world, center.x + x, center.y + y, center.z);
+            }
+        }
 //        for (int i = 0; i < 2; i++) {
 //            Spawner.spawnMan(region.world, i, i, zLevel);
 //        }
@@ -160,7 +165,7 @@ public class GameScreen implements Screen {
         mapRenderSystem.process();
         furnitureRenderSystem.process();
         appearanceRenderSystem.process();
-
+        citizenRenderSystem.process();
 
         // menu.render(spriteBatch);
 
