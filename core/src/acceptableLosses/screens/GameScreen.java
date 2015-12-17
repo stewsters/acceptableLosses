@@ -98,16 +98,15 @@ public class GameScreen implements Screen {
             }
         }
 
-        for (int x = -2; x <= 2; x++) {
-            for (int y = -2; y <= 2; y++) {
-
+        for (int x = -6; x <= 6; x++) {
+            for (int y = -6; y <= 6; y++) {
                 if (region.tiles[center.x + x][center.y + y][center.z].blocks)
                     region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
             }
         }
 
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
+        for (int x = -3; x <= 3; x++) {
+            for (int y = -3; y <= 3; y++) {
                 Spawner.spawnMan(region.world, center.x + x, center.y + y, center.z);
             }
         }

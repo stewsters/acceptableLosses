@@ -56,7 +56,7 @@ public class AiSystem extends EntityProcessingSystem {
             Task task = taskComponentMapper.getSafe(e);
 
             if (task == null) {
-                Resume resume = resumeComponentMapper.get(e);
+                Resume resume = resumeComponentMapper.getSafe(e);
                 if (resume == null)
                     e.edit().create(Resume.class);
 
