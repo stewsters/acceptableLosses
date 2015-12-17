@@ -1,0 +1,26 @@
+[
+    {"name" : "Midnight Black","r":9,"g":8,"b":6},
+    {"name" : "Off Black","r":44,"g":34,"b":43},
+    {"name" : "Darkest Brown","r": 59,"g": 48,"b" :36},
+    {"name" : "Medium Dark Brown","r" :78,"g": 67 ,"b" :73},
+    {"name" : "Chestnut Brown", "r" :80,"g": 68,"b": 68},
+    {"name" : "Light Chestnut Brown", "r" :106,"g": 76,"b": 66},
+    {"name" : "Dark Golden Brown", "r" :85,"g": 72,"b": 56},
+    {"name" : "Light Golden Brown", "r" :167,"g": 133,"b": 106},
+    {"name" : "Dark Honey Blond", "r" :184,"g": 151,"b": 120},
+    {"name" : "Bleached Blond","r":220,"g":208,"b":186},
+    {"name" : "Light Ash Blond", "r" :222,"g": 188,"b": 153},
+    {"name" : "Light Ash Brown", "r" :151,"g": 121,"b": 97},
+    {"name" : "Lightest Blond", "r" :230,"g": 206,"b": 168},
+    {"name" : "Pale Golden Blond", "r" :229,"g": 200,"b": 168},
+    {"name" : "Strawberry Blond", "r" :165,"g": 107,"b": 70},
+    {"name" : "Light Auburn", "r" :145,"g": 85,"b": 61},
+    {"name" : "Dark Auburn", "r" :83,"g": 61,"b": 50},
+    {"name" : "Darkest Gray", "r" :113,"g": 99,"b": 90},
+    {"name" : "Medium Gray", "r" :183,"g": 166,"b": 158},
+    {"name" : "Light Gray", "r" :214,"g": 196,"b": 194},
+    {"name" : "Russet Red","r":141,"g":74,"b":67},
+    {"name" : "Terra Cotta", "r" :181,"g": 82,"b": 57},
+    {"name" : "Platinum Blond", "r" :202,"g": 191,"b": 177}
+
+]

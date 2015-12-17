@@ -1,0 +1,5 @@
+[HUMAN]
+name:Human
+
+[ANDROID]
+name:"Android"

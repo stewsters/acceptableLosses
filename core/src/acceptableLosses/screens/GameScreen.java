@@ -10,6 +10,7 @@ import acceptableLosses.map.Region;
 import acceptableLosses.map.Spawner;
 import acceptableLosses.systems.AiSystem;
 import acceptableLosses.systems.AppearanceRenderSystem;
+import acceptableLosses.systems.CitizenRenderSystem;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.FurnitureRenderSystem;
 import acceptableLosses.systems.JobAssignerSystem;
@@ -43,6 +44,7 @@ public class GameScreen implements Screen {
     private MapRenderSystem mapRenderSystem;
 
     private AppearanceRenderSystem appearanceRenderSystem;
+    private CitizenRenderSystem citizenRenderSystem;
 
     private AiSystem aiSystem;
     private JobAssignerSystem jobAssignerSystem;
@@ -74,7 +76,7 @@ public class GameScreen implements Screen {
         furnitureRenderSystem = new FurnitureRenderSystem(this, spriteBatch, region);
 
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
-
+        citizenRenderSystem = region.world.setSystem(new CitizenRenderSystem(this, spriteBatch), true);
         // These should probably be pausable
 
         jobAssignerSystem = region.world.setSystem(new JobAssignerSystem(region), true);
@@ -96,16 +98,18 @@ public class GameScreen implements Screen {
             }
         }
 
-        for (int x = -2; x <= 2; x++) {
-            for (int y = -2; y <= 2; y++) {
-
+        for (int x = -6; x <= 6; x++) {
+            for (int y = -6; y <= 6; y++) {
                 if (region.tiles[center.x + x][center.y + y][center.z].blocks)
                     region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
             }
         }
 
-        Spawner.spawnMan(region.world, center.x, center.y, center.z);
-
+        for (int x = -3; x <= 3; x++) {
+            for (int y = -3; y <= 3; y++) {
+                Spawner.spawnMan(region.world, center.x + x, center.y + y, center.z);
+            }
+        }
 //        for (int i = 0; i < 2; i++) {
 //            Spawner.spawnMan(region.world, i, i, zLevel);
 //        }
@@ -160,7 +164,7 @@ public class GameScreen implements Screen {
         mapRenderSystem.process();
         furnitureRenderSystem.process();
         appearanceRenderSystem.process();
-
+        citizenRenderSystem.process();
 
         // menu.render(spriteBatch);
 
