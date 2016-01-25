@@ -6,6 +6,7 @@ import acceptableLosses.components.Path;
 import acceptableLosses.components.Position;
 import acceptableLosses.map.Region;
 import acceptableLosses.pathing.FastNonOptimalHeuristic;
+import acceptableLosses.work.CivilianMover;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
@@ -15,8 +16,6 @@ import com.badlogic.gdx.Gdx;
 import com.stewsters.util.pathing.threeDimention.pathfinder.AStarPathFinder3d;
 import com.stewsters.util.pathing.threeDimention.pathfinder.PathFinder3d;
 import com.stewsters.util.pathing.threeDimention.shared.FullPath3d;
-import com.stewsters.util.pathing.threeDimention.shared.Mover3d;
-import com.stewsters.util.pathing.threeDimention.shared.PathNode3d;
 
 public class PathFinderSystem extends EntityProcessingSystem {
 
@@ -55,12 +54,8 @@ public class PathFinderSystem extends EntityProcessingSystem {
         }
 
 
-        FullPath3d path = pathFinder.findPath(new Mover3d() {
-            @Override
-            public boolean canTraverse(PathNode3d pathNode) {
-                return !region.tiles[pathNode.x][pathNode.y][pathNode.z].blocks;
-            }
-        }, position.x, position.y, position.z, destination.destination.x, destination.destination.y, destination.destination.z);
+        //TODO: this should pull the civilian mover from the
+        FullPath3d path = pathFinder.findPath(new CivilianMover(region), position.x, position.y, position.z, destination.destination.x, destination.destination.y, destination.destination.z);
 
 
         if (path == null) {

@@ -2,7 +2,6 @@ package acceptableLosses.systems;
 
 import acceptableLosses.components.*;
 import acceptableLosses.map.Region;
-import acceptableLosses.work.CivilianMover;
 import acceptableLosses.work.jobs.Job;
 import acceptableLosses.work.jobs.JobObjective;
 import com.artemis.Aspect;
@@ -12,12 +11,8 @@ import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
 import com.stewsters.util.math.Facing3d;
-import com.stewsters.util.math.MatUtils;
 import com.stewsters.util.pathing.threeDimention.searcher.DjikstraSearcher3d;
 import com.stewsters.util.pathing.threeDimention.shared.FullPath3d;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * This doles out tasks
@@ -46,7 +41,7 @@ public class JobAssignerSystem extends EntityProcessingSystem {
         Position position = positionComponentMapper.get(e);
 
         FullPath3d fullPath3d = searcher.search(
-                new CivilianMover(region),
+                resume.mover3d,
                 position.x, position.y, position.z,
                 new JobObjective(region, resume)
         );

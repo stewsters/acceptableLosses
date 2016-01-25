@@ -2,6 +2,7 @@ package acceptableLosses.systems;
 
 import acceptableLosses.components.*;
 import acceptableLosses.map.Region;
+import acceptableLosses.work.CivilianMover;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
@@ -58,7 +59,7 @@ public class AiSystem extends EntityProcessingSystem {
             if (task == null) {
                 Resume resume = resumeComponentMapper.getSafe(e);
                 if (resume == null)
-                    e.edit().create(Resume.class);
+                    e.edit().create(Resume.class).set(new CivilianMover(region));
 
             } else {
                 // We have a task

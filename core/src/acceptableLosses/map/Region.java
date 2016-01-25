@@ -5,8 +5,6 @@ import acceptableLosses.assets.TileType;
 import acceptableLosses.work.jobs.Job;
 import com.artemis.World;
 import com.stewsters.util.math.Point3i;
-import com.stewsters.util.pathing.threeDimention.shared.Mover3d;
-import com.stewsters.util.pathing.threeDimention.shared.PathNode3d;
 import com.stewsters.util.pathing.threeDimention.shared.TileBasedMap3d;
 
 public class Region implements TileBasedMap3d {
@@ -46,41 +44,23 @@ public class Region implements TileBasedMap3d {
     }
 
     @Override
-    public int getWidthInTiles() {
+    public int getXSize() {
         return xSize;
     }
 
     @Override
-    public int getHeightInTiles() {
+    public int getYSize() {
         return ySize;
     }
 
     @Override
-    public int getDepthInTiles() {
+    public int getZSize() {
         return zSize;
     }
 
     @Override
     public void pathFinderVisited(int x, int y, int z) {
         // This is for testing.  Its called if the pathfinder visits this tile.
-    }
-
-    @Override
-    public boolean isBlocked(Mover3d mover, PathNode3d pathNode) {
-
-        return isBlocked(mover, pathNode.x, pathNode.y, pathNode.z);
-
-    }
-
-    @Override
-    public boolean isBlocked(Mover3d mover, int x, int y, int z) {
-        return tiles[x][y][z].blocks || (building[x][y][z] != null && building[x][y][z].buildingType.blocks);
-    }
-
-    @Override
-    public float getCost(Mover3d mover, int sx, int sy, int sz, int tx, int ty, int tz) {
-        // This is the cost of the move for the heuristic
-        return 1f;
     }
 
     public boolean isOutsideMap(int x, int y, int z) {

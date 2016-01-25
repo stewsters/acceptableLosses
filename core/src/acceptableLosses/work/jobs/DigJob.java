@@ -28,7 +28,7 @@ public class DigJob implements Job {
 
         for (Point3i pos : startPos.mooreNeighborhood3D()) {
 
-            if (!region.isBlocked(resume.mover3d, pos.x, pos.y, pos.z)) {
+            if (!resume.mover3d.canOccupy(pos.x, pos.y, pos.z)) {
                 return true;
             }
 
