@@ -22,11 +22,9 @@ public class HatType {
     public HatType(JSONObject hatType, TextureAtlas textureAtlas) {
         name = (String) hatType.get("name");
         armor = (int) ((Long) hatType.get("armor")).longValue();
-        breathable = (boolean) ((Boolean) hatType.get("breathable")).booleanValue();
-
+        breathable = ((Boolean) hatType.get("breathable")).booleanValue();
 
         color = AssetLoader.getColor((JSONObject) hatType.get("color"));
-        //TODO: texture loader
         texture = textureAtlas.findRegion((String) hatType.get("texture"));
     }
 }

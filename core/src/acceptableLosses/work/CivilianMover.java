@@ -24,22 +24,18 @@ public class CivilianMover implements Mover3d {
         }
 
         //Furniture
-        if (region.building[tx][ty][tz] != null &&
-                region.building[tx][ty][tz].buildingType.blocks)
-            return false;
+        return !(region.building[tx][ty][tz] != null &&
+                region.building[tx][ty][tz].buildingType.blocks);
 
-        return true;
     }
 
     @Override
     public boolean canOccupy(int tx, int ty, int tz) {
         if (region.tiles[tx][ty][tz].blocks)
             return false;
-        if (region.building[tx][ty][tz] != null &&
-                region.building[tx][ty][tz].buildingType.blocks)
-            return false;
+        return !(region.building[tx][ty][tz] != null &&
+                region.building[tx][ty][tz].buildingType.blocks);
 
-        return true;
     }
 
     @Override

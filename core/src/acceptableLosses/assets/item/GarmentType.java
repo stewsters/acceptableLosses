@@ -13,7 +13,6 @@ import java.util.HashMap;
 public class GarmentType {
 
     public static HashMap<String, GarmentType> types;
-            ;
     public final String name;
     public final TextureRegion texture;
     public final Color color;
@@ -27,11 +26,7 @@ public class GarmentType {
         speed = (int) ((Long) garmentType.get("speed")).longValue();
         armor = (int) ((Long) garmentType.get("armor")).longValue();
 
-        if (garmentType.get("fly") != null && (Boolean) garmentType.get("fly")) {
-            canFly = true;
-        } else {
-            canFly = false;
-        }
+        canFly = garmentType.get("fly") != null && (Boolean) garmentType.get("fly");
         color = AssetLoader.getColor((JSONObject) garmentType.get("color"));
         texture = textureAtlas.findRegion((String) garmentType.get("texture"));
 

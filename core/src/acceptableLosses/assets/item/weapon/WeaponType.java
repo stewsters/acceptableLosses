@@ -33,7 +33,7 @@ public class WeaponType {
 
     public WeaponType(JSONObject weapon, TextureAtlas textureAtlas) {
         name = (String) weapon.get("name");
-        weaponSlot = ((String) weapon.get("type") == "secondary") ? WeaponSlot.SECONDARY : WeaponSlot.PRIMARY;
+        weaponSlot = (weapon.get("type") == "secondary") ? WeaponSlot.SECONDARY : WeaponSlot.PRIMARY;
 
         meleeDamage = (int) ((Long) weapon.get("meleeDamage")).longValue();
         rangedDamage = (int) ((Long) weapon.get("rangedDamage")).longValue();

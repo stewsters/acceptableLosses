@@ -9,17 +9,17 @@ import com.stewsters.util.math.Point3i;
  */
 public interface Job {
 
-    public boolean satisfiedBy(Resume resume);
+    boolean satisfiedBy(Resume resume);
 
-    public Point3i getStartPos();
+    Point3i getStartPos();
 
     // This is the distance to
-    public int getWorkDistance();
+    int getWorkDistance();
 
     // The entity assigned to this
-    public void setAssignee(int id);
+    void setAssignee(int id);
 
-    public int getAssignee();
+    int getAssignee();
 
-    public void accomplishWork();
+    void accomplishWork();
 }

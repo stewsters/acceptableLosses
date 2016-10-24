@@ -25,16 +25,20 @@ public class PathFinderSystem extends EntityProcessingSystem {
     @Wire
     ComponentMapper<Destination> destinationComponentMapper;
 
-    private PathFinder3d pathFinder;
+    // TODO: we may want to have multiple of these on different threads to speed up pathing
+    private final PathFinder3d pathFinder;
 
-    private Region region;
+    private final Region region;
+    private final CivilianMover mover;
 
     public PathFinderSystem(Region region) {
         super(Aspect.getAspectForAll(Destination.class, Position.class));
         pathFinder = new AStarPathFinder3d(region, region.xSize * region.ySize, false, new FastNonOptimalHeuristic());
 
         this.region = region;
+        mover =  new CivilianMover(region);
     }
+
 
     @Override
     protected void process(Entity e) {
@@ -53,10 +57,7 @@ public class PathFinderSystem extends EntityProcessingSystem {
             return;
         }
 
-
-        //TODO: this should pull the civilian mover from the
-        FullPath3d path = pathFinder.findPath(new CivilianMover(region), position.x, position.y, position.z, destination.destination.x, destination.destination.y, destination.destination.z);
-
+        FullPath3d path = pathFinder.findPath(mover, position.x, position.y, position.z, destination.destination.x, destination.destination.y, destination.destination.z);
 
         if (path == null) {
             Gdx.app.log("PathFinderSystem", "Could not path. Abandoned.");

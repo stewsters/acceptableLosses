@@ -34,7 +34,7 @@ public class GestureDetectorController implements GestureDetector.GestureListene
 
     @Override
     public boolean longPress(float x, float y) {
-        //TODO: Should pop open spell and special ability menu
+        //TODO: Should pop open special actions menu
         return false;
     }
 
@@ -46,7 +46,6 @@ public class GestureDetectorController implements GestureDetector.GestureListene
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-
         camera.translate(-deltaX * camera.zoom, deltaY * camera.zoom);
         return false;
     }
@@ -58,7 +57,6 @@ public class GestureDetectorController implements GestureDetector.GestureListene
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
-        //TODO: this zooms to fast when zoomed in, should change by a percentage
         float dd = (initialDistance - distance) * 0.0001f;
         if (dd > 0f && camera.zoom < 1f)
             camera.zoom += dd * camera.zoom;

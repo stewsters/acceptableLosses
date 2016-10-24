@@ -34,10 +34,9 @@ public class CitizenRenderSystem extends EntityProcessingSystem {
 
         Position position = pm.get(e);
         if (position.z != gameScreen.zLevel) {
+            // TODO: check to see if we are on screen horizontally, no sense drawing stuff off screen.
             return;
         }
-
-        // TODO: check to see if we are on screen, no sense drawing stuff off screen.
 
         Citizen citizen = cm.get(e);
 

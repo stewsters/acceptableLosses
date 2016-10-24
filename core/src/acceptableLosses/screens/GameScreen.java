@@ -186,12 +186,6 @@ public class GameScreen implements Screen {
                 Gdx.app.log(this.getClass().getName(), "Job added at " + jobLocation.toString());
             } else {
                 Gdx.app.log(this.getClass().getName(), "Job already marked, removing");
-                //TODO:
-                // get entity from job,
-                // remove job from it
-                // remove job associated pathing
-                // remove job from region map
-
             }
 
         }

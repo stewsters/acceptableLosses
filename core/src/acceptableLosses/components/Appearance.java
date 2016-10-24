@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Appearance extends PooledComponent {
 
-    //TODO: add some appearance stuff
-
     public TextureRegion textureRegion;
 
     @Override
