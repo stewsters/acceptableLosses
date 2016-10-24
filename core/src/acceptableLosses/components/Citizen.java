@@ -16,7 +16,6 @@ public class Citizen extends PooledComponent {
     public String lastName;
     public Gender gender;
 
-
     public BodyShape bodyShape;
     public HairStyle hairStyle;
     public HairColor hairColor;
@@ -24,7 +23,6 @@ public class Citizen extends PooledComponent {
 
     public GarmentType garment;
     public HatType hat;
-
 
     @Override
     protected void reset() {

@@ -51,8 +51,6 @@ public class MapTools {
     }
 
     public static Vector2 world2window(float x, float y) {
-
-
         return new Vector2(x, y);
     }
 

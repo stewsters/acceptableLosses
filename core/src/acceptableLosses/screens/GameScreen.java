@@ -98,15 +98,15 @@ public class GameScreen implements Screen {
             }
         }
 
-        for (int x = -6; x <= 6; x++) {
-            for (int y = -6; y <= 6; y++) {
-                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
-                    region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
-            }
-        }
+//        for (int x = -6; x <= 6; x++) {
+//            for (int y = -6; y <= 6; y++) {
+//                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
+//                    region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
+//            }
+//        }
 
-        for (int x = -3; x <= 3; x++) {
-            for (int y = -3; y <= 3; y++) {
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
                 Spawner.spawnMan(region.world, center.x + x, center.y + y, center.z);
             }
         }
@@ -133,10 +133,8 @@ public class GameScreen implements Screen {
         //handle commands
         handleCommands();
 
-
         region.world.setDelta(delta);
         region.world.process();
-
 
         // Dont run too fast
         if (time + 100 < System.currentTimeMillis()) {
@@ -151,7 +149,6 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // controls
-
         elevationSystem.process();
 
         camera.update();
@@ -186,6 +183,7 @@ public class GameScreen implements Screen {
                 Gdx.app.log(this.getClass().getName(), "Job added at " + jobLocation.toString());
             } else {
                 Gdx.app.log(this.getClass().getName(), "Job already marked, removing");
+                region.removeJob(region.jobs[command.point2i.x][command.point2i.y][zLevel]);
             }
 
         }
