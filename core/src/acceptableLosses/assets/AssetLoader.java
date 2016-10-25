@@ -39,6 +39,7 @@ public class AssetLoader {
         initItemTypes();
         initTileTypes();
         initBuildingTypes();
+        initRecipes();
     }
 
     public static void dispose() {
@@ -143,7 +144,11 @@ public class AssetLoader {
 
             }
         }
-        HairStyle.types.put(hairStyle.id, hairStyle);
+        if (hairStyle == null) {
+            Gdx.app.log("LOADING", "No type!");
+        } else {
+            HairStyle.types.put(hairStyle.id, hairStyle);
+        }
     }
 
     private static void initBodies(TextureAtlas atlas) {
@@ -179,7 +184,11 @@ public class AssetLoader {
 
             }
         }
-        BodyShape.types.put(bodyShape.id, bodyShape);
+        if (bodyShape == null) {
+            Gdx.app.log("LOADING", "No type!");
+        } else {
+            BodyShape.types.put(bodyShape.id, bodyShape);
+        }
 
     }
 
@@ -259,7 +268,73 @@ public class AssetLoader {
             }
 
         }
-        TileType.types.put(tileType.id, tileType);
+        if (tileType == null) {
+            Gdx.app.log("LOADING", "No type!");
+        } else {
+            TileType.types.put(tileType.id, tileType);
+        }
+    }
+
+    private static void initRecipes() {
+        RecipeType.types = new LinkedHashMap<String, RecipeType>();
+
+        RecipeType recipeType = null;
+        boolean isInput = false;
+        boolean isOutput = false;
+        for (String line : Gdx.files.internal("data/dat/recipeType.txt").readString().split("\\n")) {
+            String trimmed = line.trim();
+
+            if (trimmed.startsWith("#") || trimmed.length() == 0) {
+                continue;
+            }
+
+            if (trimmed.startsWith("[")) {
+                //Then we have an id
+                if (recipeType != null) {
+                    //New one, save the old
+                    RecipeType.types.put(recipeType.id, recipeType);
+                }
+                recipeType = new RecipeType();
+                recipeType.id = trimmed.substring(1, trimmed.length() - 1);
+                recipeType.inputs = new LinkedHashMap<String, Integer>();
+                recipeType.outputs = new LinkedHashMap<String, Integer>();
+                isInput = false;
+                isOutput = false;
+
+            } else if (recipeType == null) {
+                Gdx.app.log("LOADING", "Bad ordering");
+                break;
+
+            } else if (trimmed.startsWith("name:")) {
+                //Then we have an id
+                recipeType.name = trimmed.split(":")[1];
+
+            } else if (trimmed.startsWith("transformer:")) {
+                recipeType.transformer = trimmed.split(":")[1];
+
+            } else if (trimmed.startsWith("input")) {
+                isInput = true;
+                isOutput = false;
+            } else if (trimmed.startsWith("output")) {
+                isInput = false;
+                isOutput = true;
+            } else if (isInput && trimmed.contains(":")) {
+                String quality = trimmed.split(":")[0];
+                Integer quantity = Integer.parseInt(trimmed.split(":")[1]);
+                recipeType.inputs.put(quality, quantity);
+            } else if (isOutput && trimmed.contains(":")) {
+                String quality = trimmed.split(":")[0];
+                Integer quantity = Integer.parseInt(trimmed.split(":")[1]);
+                recipeType.outputs.put(quality, quantity);
+            } else {
+//                error
+            }
+        }
+        if (recipeType == null) {
+            Gdx.app.log("LOADING", "No type!");
+        } else {
+            RecipeType.types.put(recipeType.id, recipeType);
+        }
     }
 
     private static void initItemTypes() {
@@ -294,7 +369,11 @@ public class AssetLoader {
                 itemType.texture = atlas.findRegion("item/" + trimmed.split(":")[1]);
             }
         }
-        ItemType.types.put(itemType.id, itemType);
+        if (itemType == null) {
+            Gdx.app.log("LOADING", "No type!");
+        } else {
+            ItemType.types.put(itemType.id, itemType);
+        }
     }
 
     private static void initBuildingTypes() {
@@ -337,7 +416,11 @@ public class AssetLoader {
             }
 
         }
-        BuildingType.types.put(buildingType.id, buildingType);
+        if (buildingType == null) {
+            Gdx.app.log("LOADING", "No type!");
+        } else {
+            BuildingType.types.put(buildingType.id, buildingType);
+        }
     }
 
 
