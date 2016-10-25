@@ -5,7 +5,7 @@ import acceptableLosses.assets.item.weapon.WeaponType;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
-public class Item {
+public class OldItem {
 
     public TextureRegion texture;
     public Comestible comestible;//TODO: move inside item
@@ -13,7 +13,7 @@ public class Item {
     public WeaponType weaponType;
     public GarmentType garmentType;
 
-    public Item(TextureRegion texture) {
+    public OldItem(TextureRegion texture) {
         this.texture = texture;
     }
 }

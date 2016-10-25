@@ -1,8 +1,13 @@
 package acceptableLosses.work.jobs;
 
+import acceptableLosses.assets.ItemType;
 import acceptableLosses.assets.TileType;
+import acceptableLosses.components.Appearance;
+import acceptableLosses.components.Item;
+import acceptableLosses.components.Position;
 import acceptableLosses.components.Resume;
 import acceptableLosses.map.Region;
+import com.artemis.Entity;
 import com.stewsters.util.math.Point3i;
 
 public class DigJob implements Job {
@@ -58,6 +63,13 @@ public class DigJob implements Job {
 
     @Override
     public void accomplishWork() {
+        ItemType itemType = region.tiles[startPos.x][startPos.y][startPos.z].produces;
+        if (itemType != null) {
+            Entity e = region.world.createEntity();
+            e.edit().create(Position.class).set(startPos.x, startPos.y, startPos.z);
+            e.edit().create(Appearance.class).set(itemType.texture);
+            e.edit().create(Item.class).set(itemType);
+        }
         region.tiles[startPos.x][startPos.y][startPos.z] = TileType.types.get("VACUUM");
     }
 
