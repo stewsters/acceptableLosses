@@ -8,9 +8,7 @@ import com.artemis.PooledComponent;
  */
 public class Task extends PooledComponent {
 
-
     public Job job;
-
 
     @Override
     protected void reset() {

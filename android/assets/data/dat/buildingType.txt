@@ -73,8 +73,13 @@ name:reactor
 texture:reactor
 blocks
 
+[SMELTER]
+name:smelter
+texture:reactor
 
-#[SMELTER]
-#[FABRICATOR]
+[FABRICATOR]
+name:fabricator
+texture:reactor
+
 #[ARMORY]
 

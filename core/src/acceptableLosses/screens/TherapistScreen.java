@@ -2,7 +2,7 @@ package acceptableLosses.screens;
 
 import com.badlogic.gdx.Screen;
 
-public class Therapist implements Screen {
+public class TherapistScreen implements Screen {
 
     @Override
     public void show() {

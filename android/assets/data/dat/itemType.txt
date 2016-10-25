@@ -1,0 +1,19 @@
+[SILICON_NUGGET]
+name:Silicon Nugget
+texture:siliconNugget
+
+[CARBON_NUGGET]
+name:Carbon Nugget
+texture:carbonNugget
+
+[METAL_NUGGET]
+name:Metal Nugget
+texture:metalNugget
+
+[METAL_BAR]
+name:Metal Bar
+texture:metalNugget
+
+[METAL_WALL_PANEL]
+name:Metal Wall Panel
+texture:metalNugget

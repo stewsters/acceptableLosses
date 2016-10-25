@@ -10,16 +10,19 @@ name:Vacuum
 [SILICON_ORE]
 name:Silicon Ore
 texture:silicon
+produces:SILICON_NUGGET
 blocks
 
 [CARBON_ORE]
 name:Carbon Ore
 texture:carbon
+produces:CARBON_NUGGET
 blocks
 
 [METAL_ORE]
 name:Metal Ore
 texture:metal
+produces:METAL_NUGGET
 blocks
 
 [WATER_ICE]

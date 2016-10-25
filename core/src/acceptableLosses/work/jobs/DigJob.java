@@ -5,7 +5,6 @@ import acceptableLosses.components.Resume;
 import acceptableLosses.map.Region;
 import com.stewsters.util.math.Point3i;
 
-
 public class DigJob implements Job {
 
     private Region region;

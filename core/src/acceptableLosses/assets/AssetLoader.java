@@ -36,6 +36,7 @@ public class AssetLoader {
 
         initWeapons(atlas);
 
+        initItemTypes();
         initTileTypes();
         initBuildingTypes();
     }
@@ -251,13 +252,49 @@ public class AssetLoader {
             } else if (trimmed.startsWith("texture:")) {
                 tileType.texture = atlas.findRegion("wall/" + trimmed.split(":")[1]);
                 tileType.floor = atlas.findRegion("floor/" + trimmed.split(":")[1]);
-
+            } else if (trimmed.startsWith("produces:")) {
+                tileType.produces = ItemType.types.get(trimmed.split(":")[1]);
             } else if (trimmed.startsWith("blocks")) {
                 tileType.blocks = true;
             }
 
         }
         TileType.types.put(tileType.id, tileType);
+    }
+
+    private static void initItemTypes() {
+        ItemType.types = new LinkedHashMap<String, ItemType>();
+
+        ItemType itemType = null;
+        for (String line : Gdx.files.internal("data/dat/itemType.txt").readString().split("\\n")) {
+            String trimmed = line.trim();
+
+            if (trimmed.startsWith("#") || trimmed.length() == 0) {
+                continue;
+            }
+
+            if (trimmed.startsWith("[")) {
+                //Then we have an id
+                if (itemType != null) {
+                    //New one, save the old
+                    ItemType.types.put(itemType.id, itemType);
+                }
+                itemType = new ItemType();
+                itemType.id = trimmed.substring(1, trimmed.length() - 1);
+
+            } else if (itemType == null) {
+                Gdx.app.log("LOADING", "Bad ordering");
+                break;
+
+            } else if (trimmed.startsWith("name:")) {
+                //Then we have an id
+                itemType.name = trimmed.split(":")[1];
+
+            } else if (trimmed.startsWith("texture:")) {
+                itemType.texture = atlas.findRegion("item/" + trimmed.split(":")[1]);
+            }
+        }
+        ItemType.types.put(itemType.id, itemType);
     }
 
     private static void initBuildingTypes() {
