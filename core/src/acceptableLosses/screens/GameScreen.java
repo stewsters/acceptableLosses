@@ -13,15 +13,19 @@ import acceptableLosses.systems.AppearanceRenderSystem;
 import acceptableLosses.systems.CitizenRenderSystem;
 import acceptableLosses.systems.ElevationSystem;
 import acceptableLosses.systems.FurnitureRenderSystem;
+import acceptableLosses.systems.HudRenderSystem;
 import acceptableLosses.systems.JobAssignerSystem;
 import acceptableLosses.systems.MapRenderSystem;
 import acceptableLosses.systems.MovementSystem;
 import acceptableLosses.systems.PathFinderSystem;
+import acceptableLosses.systems.TherapistRenderSystem;
 import acceptableLosses.work.jobs.DigJob;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.stewsters.util.math.Point3i;
@@ -30,32 +34,41 @@ import com.stewsters.util.math.Point3i;
 public class GameScreen implements Screen {
 
     private AcceptableLossesGame game;
-    private Region region;
+    public Region region;
 
     private OrthographicCamera camera;
     private OrthographicCamera hudCam;
     public int zLevel;
 
-    private SpriteBatch spriteBatch;
+    public SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
+    private BitmapFont font;
 
     public InputManager inputManager;
-    private ElevationSystem elevationSystem;
-    private MapRenderSystem mapRenderSystem;
 
-    private AppearanceRenderSystem appearanceRenderSystem;
-    private CitizenRenderSystem citizenRenderSystem;
+    public ElevationSystem elevationSystem;
+    public MapRenderSystem mapRenderSystem;
 
-    private AiSystem aiSystem;
-    private JobAssignerSystem jobAssignerSystem;
-    private PathFinderSystem pathFinderSystem;
-    private MovementSystem movementSystem;
-    private FurnitureRenderSystem furnitureRenderSystem;
+    public AppearanceRenderSystem appearanceRenderSystem;
+    public CitizenRenderSystem citizenRenderSystem;
+    public HudRenderSystem hudRenderSystem;
 
+    public AiSystem aiSystem;
+    public JobAssignerSystem jobAssignerSystem;
+    public PathFinderSystem pathFinderSystem;
+    public MovementSystem movementSystem;
+    public FurnitureRenderSystem furnitureRenderSystem;
+
+    // Therapist
+    public TherapistRenderSystem therapistRenderSystem;
+
+
+    public boolean simulationPaused = true;
 
     public GameScreen(AcceptableLossesGame game) {
 
         this.game = game;
+
 
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
@@ -66,14 +79,17 @@ public class GameScreen implements Screen {
 
         hudCam = new OrthographicCamera();
 
-        region = new Region(100, 100, 100);
-        AsteroidGenerator.generateBasicAsteroid(region);
 
+        font = new BitmapFont();
+        font.setColor(1f, 1f, 0.25f, 1);
+
+        region = new Region(100, 100, 100);
         zLevel = region.zSize / 2;
 
         elevationSystem = new ElevationSystem(this, region);
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
         furnitureRenderSystem = new FurnitureRenderSystem(this, spriteBatch, region);
+        hudRenderSystem = new HudRenderSystem(this, spriteBatch);
 
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
         citizenRenderSystem = region.world.setSystem(new CitizenRenderSystem(this, spriteBatch), true);
@@ -84,11 +100,23 @@ public class GameScreen implements Screen {
         pathFinderSystem = region.world.setSystem(new PathFinderSystem(region), true);
         movementSystem = region.world.setSystem(new MovementSystem(region), true);
 
+        therapistRenderSystem = region.world.setSystem(new TherapistRenderSystem(spriteBatch, font), true);
         region.world.initialize();
 
+        gen(region);
+
+
+        inputManager = new InputManager(camera);
+
+    }
+
+
+    private void gen(Region region) {
+
+
+        AsteroidGenerator.generateBasicAsteroid(region);
 
         // set up world
-
         Point3i center = new Point3i(region.xSize / 2, region.ySize / 2, region.zSize / 2);
 
         TileType vacuum = TileType.types.get("VACUUM");
@@ -110,20 +138,13 @@ public class GameScreen implements Screen {
                 Spawner.spawnMan(region.world, center.x + x, center.y + y, center.z);
             }
         }
-//        for (int i = 0; i < 2; i++) {
-//            Spawner.spawnMan(region.world, i, i, zLevel);
-//        }
-
+        int zLevel = 50;
         int i = 0;
         for (BuildingType buildingType : BuildingType.types.values()) {
             Spawner.spawnFurniture(region, 5, i + 2, zLevel, buildingType);
             i++;
         }
-
-        inputManager = new InputManager(camera);
-
     }
-
 
     long time = 0;
 
@@ -136,13 +157,15 @@ public class GameScreen implements Screen {
         region.world.setDelta(delta);
         region.world.process();
 
-        // Dont run too fast
-        if (time + 100 < System.currentTimeMillis()) {
-            aiSystem.process();
-            jobAssignerSystem.process();
-            pathFinderSystem.process();
-            movementSystem.process();
-            time = System.currentTimeMillis();
+        // Don't run too fast
+        if (!simulationPaused) {
+            if (time + 100 < System.currentTimeMillis()) {
+                aiSystem.process();
+                jobAssignerSystem.process();
+                pathFinderSystem.process();
+                movementSystem.process();
+                time = System.currentTimeMillis();
+            }
         }
 
         Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1);
@@ -150,23 +173,32 @@ public class GameScreen implements Screen {
 
         // controls
         elevationSystem.process();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            simulationPaused = !simulationPaused;
+        }
 
         camera.update();
 
         spriteBatch.setProjectionMatrix(camera.combined);
-
-        //Draw
         spriteBatch.begin();
 
+        // Game world (world coordinates)
         mapRenderSystem.process();
         furnitureRenderSystem.process();
         appearanceRenderSystem.process();
         citizenRenderSystem.process();
 
-        // menu.render(spriteBatch);
-
+        // HUD section (screen coordinates)
+        spriteBatch.setProjectionMatrix(hudCam.combined);
+        hudRenderSystem.process();
 
         spriteBatch.end();
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            game.setScreen(new TherapistScreen(game, this));
+        }
+
     }
 
     private void handleCommands() {
@@ -185,9 +217,7 @@ public class GameScreen implements Screen {
                 Gdx.app.log(this.getClass().getName(), "Job already marked, removing");
                 region.removeJob(region.jobs[command.point2i.x][command.point2i.y][zLevel]);
             }
-
         }
-
     }
 
     @Override
@@ -208,6 +238,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
+        simulationPaused = true;
     }
 
     @Override
@@ -216,7 +247,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        font.dispose();
         shapeRenderer.dispose();
         spriteBatch.dispose();
+
     }
 }

@@ -35,14 +35,18 @@ public class Spawner {
             firstName = NameGen.randomFemaleFirstName();
 
         String lastName = NameGen.randomLastName();
-        e.edit().create(Citizen.class).set(firstName, lastName, gender);
-        e.edit().create(Health.class).set(10, 10);
+//        e.edit().create(Citizen.class).set(firstName, lastName, gender);
 
         Citizen c = e.edit().create(Citizen.class);
+        c.firstName = firstName;
+        c.lastName = lastName;
+        c.gender = gender;
         c.bodyShape = BodyShape.types.get(gender.name());
         c.hairStyle = (HairStyle) MatUtils.randVal(HairStyle.types.values().toArray());
         c.hairColor = (HairColor) MatUtils.randVal(HairColor.types.values().toArray());
         c.skinColor = (SkinColor) MatUtils.randVal(SkinColor.types.values().toArray());
+
+        e.edit().create(Health.class).set(10, 10);
 
         if (MatUtils.getBoolean(0.8f))
             c.garment = (GarmentType) MatUtils.randVal(GarmentType.types.values().toArray());

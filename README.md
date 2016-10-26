@@ -1,4 +1,4 @@
-acceptableLosses
+Acceptable Losses
 ================
 
 A game about asteroid colonization.
