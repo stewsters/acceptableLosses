@@ -45,7 +45,7 @@ public class TherapistRenderSystem extends EntityProcessingSystem {
         Gdx.app.log(this.getClass().getName(), Integer.toString(lineNo) + " " + citizen.firstName);
 
 
-        String citizenInfo = (citizen.gender == Gender.MALE ? "Male" : "Female") +
+        String citizenInfo = (citizen.gender == Gender.MALE ? "M" : "F") +
                 " " + citizen.firstName +
                 " " + citizen.lastName;
 
