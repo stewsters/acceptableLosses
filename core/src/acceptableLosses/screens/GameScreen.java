@@ -11,7 +11,7 @@ import acceptableLosses.map.Spawner;
 import acceptableLosses.systems.AiSystem;
 import acceptableLosses.systems.AppearanceRenderSystem;
 import acceptableLosses.systems.CitizenRenderSystem;
-import acceptableLosses.systems.ElevationSystem;
+import acceptableLosses.systems.CameraMovementSystem;
 import acceptableLosses.systems.FurnitureRenderSystem;
 import acceptableLosses.systems.HudRenderSystem;
 import acceptableLosses.systems.JobAssignerSystem;
@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
 
     public InputManager inputManager;
 
-    public ElevationSystem elevationSystem;
+    public CameraMovementSystem cameraMovementSystem;
     public MapRenderSystem mapRenderSystem;
 
     public AppearanceRenderSystem appearanceRenderSystem;
@@ -86,11 +86,12 @@ public class GameScreen implements Screen {
         region = new Region(100, 100, 100);
         zLevel = region.zSize / 2;
 
-        elevationSystem = new ElevationSystem(this, region);
+
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
         furnitureRenderSystem = new FurnitureRenderSystem(this, spriteBatch, region);
         hudRenderSystem = new HudRenderSystem(this, spriteBatch);
 
+        cameraMovementSystem = region.world.setSystem(new CameraMovementSystem(this, region,camera),true);
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
         citizenRenderSystem = region.world.setSystem(new CitizenRenderSystem(this, spriteBatch), true);
         // These should probably be pausable
@@ -172,7 +173,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // controls
-        elevationSystem.process();
+        cameraMovementSystem.process();
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             simulationPaused = !simulationPaused;
         }
