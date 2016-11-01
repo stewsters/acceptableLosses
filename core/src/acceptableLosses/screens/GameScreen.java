@@ -10,8 +10,8 @@ import acceptableLosses.map.Region;
 import acceptableLosses.map.Spawner;
 import acceptableLosses.systems.AiSystem;
 import acceptableLosses.systems.AppearanceRenderSystem;
-import acceptableLosses.systems.CitizenRenderSystem;
 import acceptableLosses.systems.CameraMovementSystem;
+import acceptableLosses.systems.CitizenRenderSystem;
 import acceptableLosses.systems.FurnitureRenderSystem;
 import acceptableLosses.systems.HudRenderSystem;
 import acceptableLosses.systems.JobAssignerSystem;
@@ -91,7 +91,7 @@ public class GameScreen implements Screen {
         furnitureRenderSystem = new FurnitureRenderSystem(this, spriteBatch, region);
         hudRenderSystem = new HudRenderSystem(this, spriteBatch);
 
-        cameraMovementSystem = region.world.setSystem(new CameraMovementSystem(this, region,camera),true);
+        cameraMovementSystem = region.world.setSystem(new CameraMovementSystem(this, region, camera), true);
         appearanceRenderSystem = region.world.setSystem(new AppearanceRenderSystem(this, spriteBatch), true);
         citizenRenderSystem = region.world.setSystem(new CitizenRenderSystem(this, spriteBatch), true);
         // These should probably be pausable
@@ -206,14 +206,25 @@ public class GameScreen implements Screen {
         TapCommand command = (TapCommand) inputManager.popCommand();
         if (command != null) {
 
-            Point3i jobLocation = new Point3i(command.point2i.x, command.point2i.y, zLevel);
-
             if (region.isOutsideMap(command.point2i.x, command.point2i.y, zLevel)) {
                 Gdx.app.log(this.getClass().getName(), "clicked outside map");
-            } else if (region.getJobAt(command.point2i.x, command.point2i.y, zLevel) == null) {
 
+            } else if (region.building[command.point2i.x][command.point2i.y][zLevel] != null) {
+
+                if (region.building[command.point2i.x][command.point2i.y][zLevel].buildingType.id.equals("BLAST_DOOR_OPEN")) {
+                    region.building[command.point2i.x][command.point2i.y][zLevel].buildingType = BuildingType.types.get("BLAST_DOOR_CLOSED");
+
+                } else if (region.building[command.point2i.x][command.point2i.y][zLevel].buildingType.id.equals("BLAST_DOOR_CLOSED")) {
+                    region.building[command.point2i.x][command.point2i.y][zLevel].buildingType = BuildingType.types.get("BLAST_DOOR_OPEN");
+                }
+
+                Gdx.app.log(this.getClass().getName(), "switch at " + command.point2i.toString());
+
+            } else if (region.getJobAt(command.point2i.x, command.point2i.y, zLevel) == null) {
+                Point3i jobLocation = new Point3i(command.point2i.x, command.point2i.y, zLevel);
                 region.addJob(new DigJob(region, jobLocation));
-                Gdx.app.log(this.getClass().getName(), "Job added at " + jobLocation.toString());
+                Gdx.app.log(this.getClass().getName(), "Dig Job added at " + jobLocation.toString());
+
             } else {
                 Gdx.app.log(this.getClass().getName(), "Job already marked, removing");
                 region.removeJob(region.jobs[command.point2i.x][command.point2i.y][zLevel]);

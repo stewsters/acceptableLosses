@@ -31,10 +31,4 @@ public class Citizen extends PooledComponent {
         gender = null;
     }
 
-    public Citizen set(String firstName, String lastName, Gender gender) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        return this;
-    }
 }
