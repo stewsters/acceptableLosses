@@ -62,7 +62,7 @@ public class Spawner {
     }
 
 
-    public static boolean spawnFurniture(Region region, int x, int y, int z, BuildingType buildingType) {
+    public static boolean spawnBuilding(Region region, int x, int y, int z, BuildingType buildingType) {
 
         if (region.isOutsideMap(x, y, z))
             return false;

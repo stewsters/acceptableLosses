@@ -23,7 +23,6 @@ public class CivilianMover implements Mover3d {
             return false;
         }
 
-        //Furniture
         return !(region.building[tx][ty][tz] != null &&
                 region.building[tx][ty][tz].buildingType.blocks);
 

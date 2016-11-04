@@ -67,13 +67,15 @@ public class JobAssignerSystem extends EntityProcessingSystem {
                 job.setAssignee(e.getId());
                 e.edit().create(Task.class).set(job);
                 e.edit().create(Path.class).set(fullPath3d);
-            } else {
-                Gdx.app.log(this.getClass().getName(), "There is a path, but no jerbs");
             }
+//            else {
+//                Gdx.app.log(this.getClass().getName(), "There is a path, but no jerbs");
+//            }
 
-        } else {
-            Gdx.app.log(this.getClass().getName(), "There is no path to a job");
         }
+//        else {
+//            Gdx.app.log(this.getClass().getName(), "There is no path to a job");
+//        }
         e.edit().remove(Resume.class);
 
     }

@@ -12,7 +12,7 @@ import acceptableLosses.systems.AiSystem;
 import acceptableLosses.systems.AppearanceRenderSystem;
 import acceptableLosses.systems.CitizenRenderSystem;
 import acceptableLosses.systems.CameraMovementSystem;
-import acceptableLosses.systems.FurnitureRenderSystem;
+import acceptableLosses.systems.BuildingRenderSystem;
 import acceptableLosses.systems.HudRenderSystem;
 import acceptableLosses.systems.JobAssignerSystem;
 import acceptableLosses.systems.MapRenderSystem;
@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
     public JobAssignerSystem jobAssignerSystem;
     public PathFinderSystem pathFinderSystem;
     public MovementSystem movementSystem;
-    public FurnitureRenderSystem furnitureRenderSystem;
+    public BuildingRenderSystem buildingRenderSystem;
 
     // Therapist
     public TherapistRenderSystem therapistRenderSystem;
@@ -88,7 +88,7 @@ public class GameScreen implements Screen {
 
 
         mapRenderSystem = new MapRenderSystem(this, spriteBatch, region);
-        furnitureRenderSystem = new FurnitureRenderSystem(this, spriteBatch, region);
+        buildingRenderSystem = new BuildingRenderSystem(this, spriteBatch, region);
         hudRenderSystem = new HudRenderSystem(this, spriteBatch);
 
         cameraMovementSystem = region.world.setSystem(new CameraMovementSystem(this, region,camera),true);
@@ -139,10 +139,10 @@ public class GameScreen implements Screen {
                 Spawner.spawnMan(region.world, center.x + x, center.y + y, center.z);
             }
         }
-        int zLevel = 50;
+        int zLevel = center.z;
         int i = 0;
         for (BuildingType buildingType : BuildingType.types.values()) {
-            Spawner.spawnFurniture(region, 5, i + 2, zLevel, buildingType);
+            Spawner.spawnBuilding(region, 5, i + 2, zLevel, buildingType);
             i++;
         }
     }
@@ -185,7 +185,7 @@ public class GameScreen implements Screen {
 
         // Game world (world coordinates)
         mapRenderSystem.process();
-        furnitureRenderSystem.process();
+        buildingRenderSystem.process();
         appearanceRenderSystem.process();
         citizenRenderSystem.process();
 

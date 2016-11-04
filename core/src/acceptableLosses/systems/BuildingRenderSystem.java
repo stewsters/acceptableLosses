@@ -8,14 +8,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-public class FurnitureRenderSystem extends VoidEntitySystem {
+public class BuildingRenderSystem extends VoidEntitySystem {
 
     private SpriteBatch spriteBatch;
     private Region region;
     private GameScreen gameScreen;
 
 
-    public FurnitureRenderSystem(GameScreen gameScreen, SpriteBatch spriteBatch, Region region) {
+    public BuildingRenderSystem(GameScreen gameScreen, SpriteBatch spriteBatch, Region region) {
         this.gameScreen = gameScreen;
         this.spriteBatch = spriteBatch;
         this.region = region;
@@ -32,7 +32,6 @@ public class FurnitureRenderSystem extends VoidEntitySystem {
 
                 Building building = region.building[x][y][gameScreen.zLevel];
                 if (building != null && building.buildingType != null && building.buildingType.texture != null) {
-
                     spriteBatch.draw(building.buildingType.texture, x, y, 1, 1);
                 }
 
