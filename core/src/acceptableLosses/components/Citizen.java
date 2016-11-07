@@ -8,6 +8,8 @@ import acceptableLosses.assets.body.SkinColor;
 import acceptableLosses.assets.item.GarmentType;
 import acceptableLosses.assets.item.HatType;
 import com.artemis.PooledComponent;
+import com.badlogic.gdx.graphics.Color;
+import com.stewsters.util.math.MatUtils;
 import com.stewsters.util.types.Gender;
 
 public class Citizen extends PooledComponent {
@@ -22,7 +24,21 @@ public class Citizen extends PooledComponent {
     public SkinColor skinColor;
 
     public GarmentType garment;
+    public Color garmentColor = new Color(
+            MatUtils.getFloatInRange(0.1f, 1f),
+            MatUtils.getFloatInRange(0.1f, 1f),
+            MatUtils.getFloatInRange(0.1f, 1f),
+            1
+    );
+
     public HatType hat;
+    public Color hatColor = new Color(
+            MatUtils.getFloatInRange(0.1f, 1f),
+            MatUtils.getFloatInRange(0.1f, 1f),
+            MatUtils.getFloatInRange(0.1f, 1f),
+            1
+    );
+
 
     @Override
     protected void reset() {

@@ -407,10 +407,15 @@ public class AssetLoader {
             } else if (trimmed.startsWith("texture:")) {
                 buildingType.texture = atlas.findRegion("building/" + trimmed.split(":")[1]);
 
+            } else if (trimmed.startsWith("slow:")) {
+                buildingType.movementSpeed = Integer.parseInt(trimmed.split(":")[1]);
+
             } else if (trimmed.startsWith("blocks")) {
                 buildingType.blocks = true;
             } else if (trimmed.startsWith("airtight")) {
                 buildingType.airtight = true;
+            } else if (trimmed.startsWith("bed")) {
+                buildingType.bed = true;
             } else if (trimmed.startsWith("climbable")) {
                 buildingType.climbable = true;
             }

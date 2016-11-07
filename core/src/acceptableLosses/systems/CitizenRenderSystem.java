@@ -50,12 +50,13 @@ public class CitizenRenderSystem extends EntityProcessingSystem {
 
         // GARMENT
 
-        spriteBatch.setColor(1, 1, 1, 1);
+        spriteBatch.setColor(citizen.garmentColor.r, citizen.garmentColor.g, citizen.garmentColor.b, 1);
         if (citizen.garment != null) {
             spriteBatch.draw(citizen.garment.texture, position.x, position.y, 1, 1);
         }
 
         //HAIR or HAT
+        spriteBatch.setColor(citizen.hatColor.r, citizen.hatColor.g, citizen.hatColor.b, 1);
         if (citizen.hat != null) {
             spriteBatch.draw(citizen.hat.texture, position.x, position.y, 1, 1);
 

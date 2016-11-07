@@ -16,6 +16,9 @@ public class BuildingType {
     public boolean blocks = false;
     public boolean airtight = false;
     public boolean climbable = false;
+    public boolean bed = false;
+
+    public int movementSpeed = 1;
 
     // construction time, required materials
 

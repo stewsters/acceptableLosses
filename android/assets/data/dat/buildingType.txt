@@ -20,11 +20,13 @@ slow:4
 [BED]
 name:bed
 texture:bed
+bed
 slow:4
 
 [BLAST_DOOR_CLOSED]
 name:blast door closed
 texture:blastDoorClosed
+airtight
 blocks
 
 
