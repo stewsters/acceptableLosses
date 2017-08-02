@@ -93,22 +93,63 @@ public class AssetLoader {
     private static void initHats(TextureAtlas atlas) {
         HatType.types = new HashMap<String, HatType>();
 
-        FileHandle handle = Gdx.files.internal("data/json/type/HatTypes.json");
-        String text = handle.readString();
+        HatType hatType = null;
+        for (String line : Gdx.files.internal("data/dat/hatTypes.txt").readString().split("\\n")) {
+            String trimmed = line.trim();
 
-        try {
-            JSONParser parser = new JSONParser();
-            JSONArray array = (JSONArray) parser.parse(text);
-            for (Object object : array) {
-                HatType hatType = new HatType((JSONObject) object, atlas);
-                HatType.types.put(hatType.name, hatType);
-                System.out.println(hatType.name);
+            if (trimmed.startsWith("#") || trimmed.length() == 0) {
+                continue;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (trimmed.startsWith("[")) {
+                //Then we have an id
+                if (hatType != null) {
+                    //New one, save the old
+                    HatType.types.put(hatType.id, hatType);
+                }
+                hatType = new HatType();
+                hatType.id = trimmed.substring(1, trimmed.length() - 1);
+
+            } else if (hatType == null) {
+                Gdx.app.log("LOADING", "Bad ordering");
+                break;
+
+            } else {
+                String tag = trimmed.split(":")[0].trim().toLowerCase();
+                String value = trimmed.split(":")[1].trim();
+
+                switch (tag) {
+                    case "name":
+                        hatType.name = value;
+                        break;
+                    case "texture":
+                        hatType.texture = atlas.findRegion("character/parts/hats/" + value);
+                        assert hatType.texture!=null;
+                        break;
+                    case "color":
+                        hatType.color = AssetLoader.getColor(value);
+                        break;
+                    case "armor":
+                        hatType.armor = Integer.parseInt(value);
+                        break;
+                    case "breathable":
+                        hatType.breathable = Boolean.parseBoolean(value);
+                        break;
+                    default:
+                        Gdx.app.log("AssetLoader", "Unknown tag:" + trimmed);
+                }
+            }
+        }
+        if (hatType == null) {
+            Gdx.app.log("LOADING", "No type!");
+        } else {
+            HatType.types.put(hatType.id, hatType);
         }
 
+    }
+
+    private static Color getColor(String s) {
+        return null;
     }
 
     private static void initHair(TextureAtlas atlas) {

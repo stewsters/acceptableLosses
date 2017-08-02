@@ -1,0 +1,27 @@
+[SPACE_HELMET]
+name:Space Helmet
+armor: 0
+breathable: true
+color:255,255,255
+texture:spaceHelmet
+
+[BERET]
+name:Baret
+armor:0
+breathable:false
+color:255,255,255
+texture:hat
+
+[COMBAT_HELMET]
+name:Combat Helmet
+armor:1
+breathable:false
+color:255,255,255
+texture:combatHelmet
+
+[ASSAULT_HELMET]
+name:Assault Helmet
+armor:2
+breathable:false,
+color:255,255,255
+texture:assaultHelmet

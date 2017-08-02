@@ -11,21 +11,25 @@ name:Vacuum
 name:Silicon Ore
 texture:silicon
 produces:SILICON_NUGGET
+rgb: 244 164 96
 blocks
 
 [CARBON_ORE]
 name:Carbon Ore
 texture:carbon
 produces:CARBON_NUGGET
+rgb: 60 60 60
 blocks
 
 [METAL_ORE]
 name:Metal Ore
 texture:metal
 produces:METAL_NUGGET
+rgb: 100 100 100
 blocks
 
 [WATER_ICE]
 name:Ice
 texture:ice
+rgb: 200 200 255
 blocks
