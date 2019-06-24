@@ -25,6 +25,12 @@ public class GestureDetectorController implements GestureDetector.GestureListene
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
+        // todo: this should depend on the mode.
+
+        // in play mode it should select the unit, and allow the user to give instructions.
+        //  if there is not unit it should select the tile and give info on it
+        // in build mode, it should construct the selected building here
+        // in dig mode, it should mark the area for excavation
 
         inputManager.tapCommand(MapTools.window2world(Gdx.input.getX(), Gdx.input.getY(), camera));
 

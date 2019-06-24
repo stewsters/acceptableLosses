@@ -127,12 +127,13 @@ public class GameScreen implements Screen {
             }
         }
 
-//        for (int x = -6; x <= 6; x++) {
-//            for (int y = -6; y <= 6; y++) {
-//                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
-//                    region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
-//            }
-//        }
+
+        for (int x = -30; x <= 30; x++) {
+            for (int y = -30; y <= 30; y++) {
+                if (region.tiles[center.x + x][center.y + y][center.z].blocks)
+                    region.addJob(new DigJob(region, new Point3i(center.x + x, center.y + y, center.z)));
+            }
+        }
 
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
